@@ -14,6 +14,8 @@
 		728FA14A1AEF28A400C7A368 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 728FA1481AEF28A400C7A368 /* LaunchScreen.xib */; };
 		728FA1561AEF28A400C7A368 /* MarkdownTextViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728FA1551AEF28A400C7A368 /* MarkdownTextViewTests.swift */; };
 		72C40CC51AF01EA40058ABC5 /* RegularExpressionTextStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C40CC41AF01EA40058ABC5 /* RegularExpressionTextStorage.swift */; };
+		72CB4FD91AF03E74000B3993 /* MarkdownTextStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CB4FD81AF03E74000B3993 /* MarkdownTextStorage.swift */; };
+		72CB4FDB1AF04A43000B3993 /* MarkdownAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CB4FDA1AF04A43000B3993 /* MarkdownAttributes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +40,8 @@
 		728FA1541AEF28A400C7A368 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		728FA1551AEF28A400C7A368 /* MarkdownTextViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownTextViewTests.swift; sourceTree = "<group>"; };
 		72C40CC41AF01EA40058ABC5 /* RegularExpressionTextStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegularExpressionTextStorage.swift; sourceTree = "<group>"; };
+		72CB4FD81AF03E74000B3993 /* MarkdownTextStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownTextStorage.swift; sourceTree = "<group>"; };
+		72CB4FDA1AF04A43000B3993 /* MarkdownAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownAttributes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +86,8 @@
 				728FA13F1AEF28A400C7A368 /* AppDelegate.swift */,
 				728FA1411AEF28A400C7A368 /* ViewController.swift */,
 				72C40CC41AF01EA40058ABC5 /* RegularExpressionTextStorage.swift */,
+				72CB4FD81AF03E74000B3993 /* MarkdownTextStorage.swift */,
+				72CB4FDA1AF04A43000B3993 /* MarkdownAttributes.swift */,
 				728FA1431AEF28A400C7A368 /* Main.storyboard */,
 				728FA1461AEF28A400C7A368 /* Images.xcassets */,
 				728FA1481AEF28A400C7A368 /* LaunchScreen.xib */,
@@ -216,8 +222,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				728FA1421AEF28A400C7A368 /* ViewController.swift in Sources */,
+				72CB4FD91AF03E74000B3993 /* MarkdownTextStorage.swift in Sources */,
 				728FA1401AEF28A400C7A368 /* AppDelegate.swift in Sources */,
 				72C40CC51AF01EA40058ABC5 /* RegularExpressionTextStorage.swift in Sources */,
+				72CB4FDB1AF04A43000B3993 /* MarkdownAttributes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

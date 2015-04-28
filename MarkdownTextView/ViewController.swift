@@ -15,8 +15,7 @@ class ViewController: UIViewController {
         let textContainer = NSTextContainer()
         let layoutManager = NSLayoutManager()
         layoutManager.addTextContainer(textContainer)
-        let textStorage = RegularExpressionTextStorage()
-        textStorage.addRegularExpression(NSRegularExpression(pattern: "\\*\\*[\\w\\d]+\\*\\*", options: nil, error: nil)!, withAttributes: [NSFontAttributeName: UIFont.boldSystemFontOfSize(17)])
+        let textStorage = MarkdownTextStorage()
         textStorage.addLayoutManager(layoutManager)
         
         let textView = UITextView(frame: CGRectZero, textContainer: textContainer)
