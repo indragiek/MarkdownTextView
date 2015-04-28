@@ -15,7 +15,7 @@ class ViewController: UIViewController {
         let textContainer = NSTextContainer()
         let layoutManager = NSLayoutManager()
         layoutManager.addTextContainer(textContainer)
-        let textStorage = NSTextStorage()
+        let textStorage = RegularExpressionTextStorage()
         textStorage.addLayoutManager(layoutManager)
         
         let textView = UITextView(frame: CGRectZero, textContainer: textContainer)
