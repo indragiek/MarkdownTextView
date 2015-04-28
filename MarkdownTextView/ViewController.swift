@@ -12,14 +12,19 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        let textContainer = NSTextContainer()
+        let layoutManager = NSLayoutManager()
+        layoutManager.addTextContainer(textContainer)
+        let textStorage = NSTextStorage()
+        textStorage.addLayoutManager(layoutManager)
+        
+        let textView = UITextView(frame: CGRectZero, textContainer: textContainer)
+        textView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        view.addSubview(textView)
+        
+        let views = ["textView": textView]
+        var constraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-20-[textView]-20-|", options: nil, metrics: nil, views: views)
+        constraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-20-[textView]-20-|", options: nil, metrics: nil, views: views)
+        NSLayoutConstraint.activateConstraints(constraints)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
 }
-
