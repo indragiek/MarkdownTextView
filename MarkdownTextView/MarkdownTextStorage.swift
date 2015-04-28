@@ -21,41 +21,41 @@ public class MarkdownTextStorage: RegularExpressionTextStorage {
         super.init()
         defaultAttributes = attributes.defaultAttributes
         
-        func add(pattern: String, attributes: MarkdownAttributes.TextAttributes?) {
-            if let attributes = attributes {
-                var error: NSError?
-                if let regex = NSRegularExpression(pattern: pattern, options: .AnchorsMatchLines, error: &error) {
-                    self.addRegularExpression(regex, withAttributes: attributes)
-                } else {
-                    fatalError("Failed to initialize regular expression with pattern \(pattern): \(error)")
-                }
-            }
-        }
-        
-        func attributesForTraits(traits: UIFontDescriptorSymbolicTraits,  var attributes: MarkdownAttributes.TextAttributes?) -> MarkdownAttributes.TextAttributes? {
-            if let defaultFont = defaultAttributes[NSFontAttributeName] as? UIFont where attributes == nil {
-                attributes = [
-                    NSFontAttributeName: fontWithTraits(traits, defaultFont)
-                ]
-            }
-            return attributes
-        }
-        
         // Regular expressions are from John Gruber's original Markdown.pl
         // implementation (v1.0.1): http://daringfireball.net/projects/markdown/
         
         // Emphasis
-        add("(\\*|_)(?=\\S)(.+?)(?<=\\S)\\1", attributesForTraits(.TraitItalic, attributes.emphasisAttributes))
+        addPattern("(\\*|_)(?=\\S)(.+?)(?<=\\S)\\1", attributesForTraits(.TraitItalic, attributes.emphasisAttributes))
         
         // Strong
-        add("(\\*\\*|__)(?=\\S)(.+?[*_]*)(?<=\\S)\\1", attributesForTraits(.TraitBold, attributes.strongAttributes))
+        addPattern("(\\*\\*|__)(?=\\S)(.+?[*_]*)(?<=\\S)\\1", attributesForTraits(.TraitBold, attributes.strongAttributes))
         
         // Se-text style headers
         // H1
-        add("^(.+)[ \t]*\n=+[ \t]*\n+", attributes.h1Attributes)
+        addPattern("^(.+)[ \t]*\n=+[ \t]*\n+", attributes.h1Attributes)
         
         // H2
-        add("^(.+)[ \t]*\n-+[ \t]*\n+", attributes.h2Attributes)
+        addPattern("^(.+)[ \t]*\n-+[ \t]*\n+", attributes.h2Attributes)
+    }
+    
+    private func addPattern(pattern: String, _ attributes: MarkdownAttributes.TextAttributes?) {
+        if let attributes = attributes {
+            var error: NSError?
+            if let regex = NSRegularExpression(pattern: pattern, options: .AnchorsMatchLines, error: &error) {
+                self.addRegularExpression(regex, withAttributes: attributes)
+            } else {
+                fatalError("Failed to initialize regular expression with pattern \(pattern): \(error)")
+            }
+        }
+    }
+    
+    private func attributesForTraits(traits: UIFontDescriptorSymbolicTraits, var _ attributes: MarkdownAttributes.TextAttributes?) -> MarkdownAttributes.TextAttributes? {
+        if let defaultFont = defaultAttributes[NSFontAttributeName] as? UIFont where attributes == nil {
+            attributes = [
+                NSFontAttributeName: fontWithTraits(traits, defaultFont)
+            ]
+        }
+        return attributes
     }
 
     required public init(coder aDecoder: NSCoder) {
