@@ -16,19 +16,17 @@ public class RegularExpressionTextStorage: NSTextStorage {
     
     private let backingStore: NSMutableAttributedString
     private var expressions = [Expression]()
-    private var defaultAttributes: [String: AnyObject] = [
+    public var defaultAttributes: [String: AnyObject] = [
         NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
     ] {
-        didSet {
-            highlightRange(NSRange(location: 0, length: (backingStore.string as NSString).length))
-        }
+        didSet { editedAll() }
     }
     
     // MARK: API
     
     public func addRegularExpression(expression: NSRegularExpression, withAttributes attributes: [String: AnyObject]) {
         expressions.append(Expression(regex: expression, attributes: attributes))
-        edited(.EditedAttributes, range: NSRange(location: 0, length: backingStore.length), changeInLength: 0)
+        editedAll()
     }
     
     // MARK: Initialization
@@ -64,9 +62,12 @@ public class RegularExpressionTextStorage: NSTextStorage {
     }
     
     public override func processEditing() {
-        let lineRange = (backingStore.string as NSString).lineRangeForRange(editedRange)
-        highlightRange(lineRange)
+        highlightRange(NSRange(location: 0, length: (backingStore.string as NSString).length))
         super.processEditing()
+    }
+    
+    private func editedAll() {
+        edited(.EditedAttributes, range: NSRange(location: 0, length: backingStore.length), changeInLength: 0)
     }
     
     private func highlightRange(range: NSRange) {
