@@ -70,8 +70,8 @@ public class RegularExpressionTextStorage: NSTextStorage {
     }
     
     private func highlightRange(range: NSRange) {
-        setAttributes(defaultAttributes, range: range)
         backingStore.beginEditing()
+        setAttributes(defaultAttributes, range: range)
         for expression in expressions {
             expression.regex.enumerateMatchesInString(backingStore.string, options: nil, range: range) { (result, _, _) in
                 self.addAttributes(expression.attributes, range: result.range)
