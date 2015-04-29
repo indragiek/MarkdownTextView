@@ -12,6 +12,7 @@
 		7252E0141AF17D01006D0535 /* MarkdownHeaderHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7252E0131AF17D01006D0535 /* MarkdownHeaderHighlighter.swift */; };
 		7252E0161AF17F30006D0535 /* MarkdownLinkHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7252E0151AF17F30006D0535 /* MarkdownLinkHighlighter.swift */; };
 		7252E0181AF1801D006D0535 /* MarkdownListHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7252E0171AF1801D006D0535 /* MarkdownListHighlighter.swift */; };
+		7252E01A1AF1833C006D0535 /* LinkHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7252E0191AF1833C006D0535 /* LinkHighlighter.swift */; };
 		728FA1401AEF28A400C7A368 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728FA13F1AEF28A400C7A368 /* AppDelegate.swift */; };
 		728FA1421AEF28A400C7A368 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728FA1411AEF28A400C7A368 /* ViewController.swift */; };
 		728FA1451AEF28A400C7A368 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 728FA1431AEF28A400C7A368 /* Main.storyboard */; };
@@ -40,6 +41,7 @@
 		7252E0131AF17D01006D0535 /* MarkdownHeaderHighlighter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownHeaderHighlighter.swift; sourceTree = "<group>"; };
 		7252E0151AF17F30006D0535 /* MarkdownLinkHighlighter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownLinkHighlighter.swift; sourceTree = "<group>"; };
 		7252E0171AF1801D006D0535 /* MarkdownListHighlighter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownListHighlighter.swift; sourceTree = "<group>"; };
+		7252E0191AF1833C006D0535 /* LinkHighlighter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkHighlighter.swift; sourceTree = "<group>"; };
 		728FA13A1AEF28A400C7A368 /* MarkdownTextView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarkdownTextView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		728FA13E1AEF28A400C7A368 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		728FA13F1AEF28A400C7A368 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 				728FA1411AEF28A400C7A368 /* ViewController.swift */,
 				72C40CC41AF01EA40058ABC5 /* HighlighterTextStorage.swift */,
 				7252E00F1AF17904006D0535 /* HighlighterType.swift */,
+				7252E0191AF1833C006D0535 /* LinkHighlighter.swift */,
 				7252E0111AF17AFB006D0535 /* RegularExpressionHighlighter.swift */,
 				72CB4FD81AF03E74000B3993 /* MarkdownTextStorage.swift */,
 				72CB4FDA1AF04A43000B3993 /* MarkdownAttributes.swift */,
@@ -240,6 +243,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7252E0141AF17D01006D0535 /* MarkdownHeaderHighlighter.swift in Sources */,
+				7252E01A1AF1833C006D0535 /* LinkHighlighter.swift in Sources */,
 				728FA1421AEF28A400C7A368 /* ViewController.swift in Sources */,
 				7252E0161AF17F30006D0535 /* MarkdownLinkHighlighter.swift in Sources */,
 				72CB4FD91AF03E74000B3993 /* MarkdownTextStorage.swift in Sources */,

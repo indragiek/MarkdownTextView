@@ -15,7 +15,14 @@ class ViewController: UIViewController {
         let textContainer = NSTextContainer()
         let layoutManager = NSLayoutManager()
         layoutManager.addTextContainer(textContainer)
+        
         let textStorage = MarkdownTextStorage()
+        var error: NSError?
+        if let linkHighlighter = LinkHighlighter(errorPtr: &error) {
+            textStorage.addHighlighter(linkHighlighter)
+        } else {
+            assertionFailure("Error initializing LinkHighlighter: \(error)")
+        }
         textStorage.addLayoutManager(layoutManager)
         
         let textView = UITextView(frame: CGRectZero, textContainer: textContainer)
