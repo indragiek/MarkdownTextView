@@ -28,7 +28,8 @@ private func regexFromPattern(pattern: String) -> NSRegularExpression {
 public class MarkdownTextStorage: RegularExpressionTextStorage {
     // Regular expressions are from John Gruber's original Markdown.pl
     // implementation (v1.0.1): http://daringfireball.net/projects/markdown/
-    private static let HeaderRegex = regexFromPattern("^(\\#{1,6})[ \\t]*(.+?)[ \\t]*\\#*\\n+")
+    private static let HeaderRegex = regexFromPattern("^(\\#{1,6})[ \t]*(.+?)[ \t]*\\#*\n+")
+    private static let LinkRegex = regexFromPattern("\\[([^\\[]+)\\]\\([ \t]*<?(.*?)>?[ \t]*((['\"])(.*?)\\4)?\\)")
     
     private let attributes: MarkdownAttributes
     
@@ -60,15 +61,28 @@ public class MarkdownTextStorage: RegularExpressionTextStorage {
     // MARK: RegularExpressionTextStorage
     
     override func highlightRange(range: NSRange) {
-        // atx style headers
+        highlightHeadersInRange(range)
+        highlightLinksInRange(range)
+        super.highlightRange(range)
+    }
+    
+    private func highlightHeadersInRange(range: NSRange) {
         self.dynamicType.HeaderRegex.enumerateMatchesInString(string, options: nil, range: range) { (result, _, _) in
             let level = result.rangeAtIndex(1).length
             if let attributes = self.attributes.attributesForHeaderLevel(level) {
                 self.addAttributes(attributes, range: result.range)
             }
         }
-        
-        super.highlightRange(range)
+    }
+    
+    private func highlightLinksInRange(range: NSRange) {
+        self.dynamicType.LinkRegex.enumerateMatchesInString(string, options: nil, range: range) { (result, _, _) in
+            let URLString = (self.string as NSString).substringWithRange(result.rangeAtIndex(2))
+            let linkAttributes = [
+                NSLinkAttributeName: URLString
+            ]
+            self.addAttributes(linkAttributes, range: result.rangeAtIndex(0))
+        }
     }
     
     // MARK: Helpers
