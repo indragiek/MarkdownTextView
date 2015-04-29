@@ -8,9 +8,13 @@
 
 import UIKit
 
+public typealias TextAttributes = [String: AnyObject]
+
+/**
+*  Encapsulates the attributes to use for styling various types
+*  of Markdown elements.
+*/
 public struct MarkdownAttributes {
-    public typealias TextAttributes = [String: AnyObject]
-    
     public var defaultAttributes: TextAttributes = [
         NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
     ]
@@ -78,7 +82,7 @@ public struct MarkdownAttributes {
         NSForegroundColorAttributeName: UIColor.darkGrayColor()
     ]
     
-    public func attributesForHeaderLevel(level: Int) -> TextAttributes? {
+    internal func attributesForHeaderLevel(level: Int) -> TextAttributes? {
         switch level {
         case 1: return h1Attributes
         case 2: return h2Attributes

@@ -8,6 +8,10 @@
 
 import UIKit
 
+/**
+*  Text storage with support for automatically styling text
+*  by matching a set of regular expressions.
+*/
 public class RegularExpressionTextStorage: NSTextStorage {
     private struct Expression {
         let regex: NSRegularExpression
@@ -16,6 +20,8 @@ public class RegularExpressionTextStorage: NSTextStorage {
     
     private let backingStore: NSMutableAttributedString
     private var expressions = [Expression]()
+    
+    /// Default attributes to use for styling text.
     public var defaultAttributes: [String: AnyObject] = [
         NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
     ] {
@@ -24,6 +30,16 @@ public class RegularExpressionTextStorage: NSTextStorage {
     
     // MARK: API
     
+    /**
+    Adds a regular expression to use for matching text to style.
+    
+    Regular expressions are evaluated in the order in which they
+    are added.
+    
+    :param: expression The regular expression.
+    :param: attributes The text attributes to apply to range(s) of
+    text that match the regular expression.
+    */
     public func addRegularExpression(expression: NSRegularExpression, withAttributes attributes: [String: AnyObject]) {
         expressions.append(Expression(regex: expression, attributes: attributes))
         editedAll(.EditedAttributes)
@@ -83,7 +99,7 @@ public class RegularExpressionTextStorage: NSTextStorage {
         backingStore.endEditing()
     }
     
-    func highlightRange(range: NSRange) {
+    internal func highlightRange(range: NSRange) {
         for expression in expressions {
             expression.regex.enumerateMatchesInString(string, options: nil, range: range) { (result, _, _) in
                 self.addAttributes(expression.attributes, range: result.range)

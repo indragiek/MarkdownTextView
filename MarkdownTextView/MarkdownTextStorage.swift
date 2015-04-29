@@ -8,19 +8,9 @@
 
 import UIKit
 
-private func regexFromPattern(pattern: String) -> NSRegularExpression {
-    var error: NSError?
-    if let regex = NSRegularExpression(pattern: pattern, options: .AnchorsMatchLines, error: &error) {
-        return regex
-    } else {
-        fatalError("Failed to initialize regular expression with pattern \(pattern): \(error)")
-    }
-}
-
-private func listItemRegexWithMarkerPattern(pattern: String) -> NSRegularExpression {
-    return regexFromPattern("(?:[ ]{0,3}(?:\(pattern))[ \t]+)(.+)")
-}
-
+/**
+*  Text storage with support for highlighting Markdown.
+*/
 public class MarkdownTextStorage: RegularExpressionTextStorage {
     // Regular expressions are from John Gruber's original Markdown.pl
     // implementation (v1.0.1): http://daringfireball.net/projects/markdown/
@@ -36,6 +26,13 @@ public class MarkdownTextStorage: RegularExpressionTextStorage {
     
     // MARK: Initialization
     
+    /**
+    Creates a new instance of the receiver.
+    
+    :param: attributes Attributes used to style the text.
+    
+    :returns: An initialized instance of `MarkdownTextStorage`
+    */
     public init(attributes: MarkdownAttributes = MarkdownAttributes()) {
         self.attributes = attributes
         super.init()
@@ -70,7 +67,7 @@ public class MarkdownTextStorage: RegularExpressionTextStorage {
     
     // MARK: RegularExpressionTextStorage
     
-    override func highlightRange(range: NSRange) {
+    override internal func highlightRange(range: NSRange) {
         highlightHeadersInRange(range)
         highlightLinksInRange(range)
         highlightListsInRange(range,
@@ -105,7 +102,7 @@ public class MarkdownTextStorage: RegularExpressionTextStorage {
         }
     }
     
-    private func highlightListsInRange(range: NSRange, regex: NSRegularExpression, attributes: MarkdownAttributes.TextAttributes?, itemAttributes: MarkdownAttributes.TextAttributes?) {
+    private func highlightListsInRange(range: NSRange, regex: NSRegularExpression, attributes: TextAttributes?, itemAttributes: TextAttributes?) {
         if (attributes == nil && itemAttributes == nil) { return }
         
         regex.enumerateMatchesInString(string, options: nil, range: range) { (result, _, _) in
@@ -120,13 +117,13 @@ public class MarkdownTextStorage: RegularExpressionTextStorage {
     
     // MARK: Helpers
     
-    private func addPattern(pattern: String, _ attributes: MarkdownAttributes.TextAttributes?) {
+    private func addPattern(pattern: String, _ attributes: TextAttributes?) {
         if let attributes = attributes {
             self.addRegularExpression(regexFromPattern(pattern), withAttributes: attributes)
         }
     }
     
-    private func attributesForTraits(traits: UIFontDescriptorSymbolicTraits, var _ attributes: MarkdownAttributes.TextAttributes?) -> MarkdownAttributes.TextAttributes? {
+    private func attributesForTraits(traits: UIFontDescriptorSymbolicTraits, var _ attributes: TextAttributes?) -> TextAttributes? {
         if let defaultFont = defaultAttributes[NSFontAttributeName] as? UIFont where attributes == nil {
             attributes = [
                 NSFontAttributeName: fontWithTraits(traits, defaultFont)
@@ -134,4 +131,17 @@ public class MarkdownTextStorage: RegularExpressionTextStorage {
         }
         return attributes
     }
+}
+
+private func regexFromPattern(pattern: String) -> NSRegularExpression {
+    var error: NSError?
+    if let regex = NSRegularExpression(pattern: pattern, options: .AnchorsMatchLines, error: &error) {
+        return regex
+    } else {
+        fatalError("Failed to initialize regular expression with pattern \(pattern): \(error)")
+    }
+}
+
+private func listItemRegexWithMarkerPattern(pattern: String) -> NSRegularExpression {
+    return regexFromPattern("(?:[ ]{0,3}(?:\(pattern))[ \t]+)(.+)")
 }
