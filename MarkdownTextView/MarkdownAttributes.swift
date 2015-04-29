@@ -58,7 +58,7 @@ public struct MarkdownAttributes {
         }
     }
     
-    public var headerAttributes: HeaderAttributes?
+    public var headerAttributes: HeaderAttributes? = HeaderAttributes()
     
     private static let MonospaceFont: UIFont = {
         let bodyFont = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
