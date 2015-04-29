@@ -65,7 +65,8 @@ public struct MarkdownAttributes {
     ]
     
     public var orderedListItemAttributes: TextAttributes? = [
-        NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+        NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleBody),
+        NSForegroundColorAttributeName: UIColor.darkGrayColor()
     ]
     
     public var unorderedListAttributes: TextAttributes? = [
@@ -73,7 +74,8 @@ public struct MarkdownAttributes {
     ]
     
     public var unorderedListItemAttributes: TextAttributes? = [
-        NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+        NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleBody),
+        NSForegroundColorAttributeName: UIColor.darkGrayColor()
     ]
     
     public func attributesForHeaderLevel(level: Int) -> TextAttributes? {
