@@ -143,5 +143,5 @@ private func regexFromPattern(pattern: String) -> NSRegularExpression {
 }
 
 private func listItemRegexWithMarkerPattern(pattern: String) -> NSRegularExpression {
-    return regexFromPattern("(?:[ ]{0,3}(?:\(pattern))[ \t]+)(.+)")
+    return regexFromPattern("^(?:[ ]{0,3}(?:\(pattern))[ \t]+)(.+)\n")
 }

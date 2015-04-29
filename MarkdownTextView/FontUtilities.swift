@@ -8,7 +8,7 @@
 
 import UIKit
 
-func fontWithTraits(traits: UIFontDescriptorSymbolicTraits, font: UIFont) -> UIFont {
+internal func fontWithTraits(traits: UIFontDescriptorSymbolicTraits, font: UIFont) -> UIFont {
     let combinedTraits = UIFontDescriptorSymbolicTraits(font.fontDescriptor().symbolicTraits.rawValue | (traits.rawValue & 0xFFFF))
     if let descriptor = font.fontDescriptor().fontDescriptorWithSymbolicTraits(combinedTraits) {
         return UIFont(descriptor: descriptor, size: font.pointSize)
