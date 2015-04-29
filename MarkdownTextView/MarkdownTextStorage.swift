@@ -27,7 +27,7 @@ public class MarkdownTextStorage: RegularExpressionTextStorage {
     //
     // See the original source for documentation on these
     // expressions.
-    private static let HeaderRegex = regexFromPattern("^(\\#{1,6})[ \t]*(.+?)[ \t]*\\#*\n+")
+    private static let HeaderRegex = regexFromPattern("^(\\#{1,6})[ \t]*(?:.+?)[ \t]*\\#*\n+")
     private static let LinkRegex = regexFromPattern("\\[([^\\[]+)\\]\\([ \t]*<?(.*?)>?[ \t]*((['\"])(.*?)\\4)?\\)")
     private static let UnorderedListRegex = listItemRegexWithMarkerPattern("[*+-]")
     private static let OrderedListRegex = listItemRegexWithMarkerPattern("\\d+[.]")
@@ -46,19 +46,19 @@ public class MarkdownTextStorage: RegularExpressionTextStorage {
         
         // Se-text style headers
         // H1
-        addPattern("^(.+)[ \t]*\n=+[ \t]*\n+", attributes.h1Attributes)
+        addPattern("^(?:.+)[ \t]*\n=+[ \t]*\n+", attributes.h1Attributes)
         
         // H2
-        addPattern("^(.+)[ \t]*\n-+[ \t]*\n+", attributes.h2Attributes)
+        addPattern("^(?:.+)[ \t]*\n-+[ \t]*\n+", attributes.h2Attributes)
         
         // Emphasis
         addPattern("(\\*|_)(?=\\S)(.+?)(?<=\\S)\\1", attributesForTraits(.TraitItalic, attributes.emphasisAttributes))
         
         // Strong
-        addPattern("(\\*\\*|__)(?=\\S)(.+?[*_]*)(?<=\\S)\\1", attributesForTraits(.TraitBold, attributes.strongAttributes))
+        addPattern("(\\*\\*|__)(?=\\S)(?:.+?[*_]*)(?<=\\S)\\1", attributesForTraits(.TraitBold, attributes.strongAttributes))
         
         // Inline code
-        addPattern("(`+)(.+?)(?<!`)\\1(?!`)", attributes.inlineCodeAttributes)
+        addPattern("(`+)(?:.+?)(?<!`)\\1(?!`)", attributes.inlineCodeAttributes)
     }
     
     required public init(coder aDecoder: NSCoder) {
