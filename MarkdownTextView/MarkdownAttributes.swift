@@ -56,8 +56,7 @@ public struct MarkdownAttributes {
     }()
     
     public var codeBlockAttributes: TextAttributes? = [
-        NSFontAttributeName: MarkdownAttributes.MonospaceFont,
-        NSParagraphStyleAttributeName: MarkdownAttributes.IndentedParagraphStyle
+        NSFontAttributeName: MarkdownAttributes.MonospaceFont
     ]
     
     public var inlineCodeAttributes: TextAttributes? = [

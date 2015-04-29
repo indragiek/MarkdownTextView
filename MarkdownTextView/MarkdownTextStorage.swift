@@ -40,11 +40,8 @@ public class MarkdownTextStorage: RegularExpressionTextStorage {
         super.init()
         defaultAttributes = attributes.defaultAttributes
         
-        // Emphasis
-        addPattern("(\\*|_)(?=\\S)(.+?)(?<=\\S)\\1", attributesForTraits(.TraitItalic, attributes.emphasisAttributes))
-        
-        // Strong
-        addPattern("(\\*\\*|__)(?=\\S)(.+?[*_]*)(?<=\\S)\\1", attributesForTraits(.TraitBold, attributes.strongAttributes))
+        // Code blocks
+        addPattern("(?:\n\n|\\A)((?:(?:[ ]{4}|\t).*\n+)+)((?=^[ ]{0,4}\\S)|\\Z)", attributes.codeBlockAttributes)
         
         // Se-text style headers
         // H1
@@ -52,6 +49,15 @@ public class MarkdownTextStorage: RegularExpressionTextStorage {
         
         // H2
         addPattern("^(.+)[ \t]*\n-+[ \t]*\n+", attributes.h2Attributes)
+        
+        // Emphasis
+        addPattern("(\\*|_)(?=\\S)(.+?)(?<=\\S)\\1", attributesForTraits(.TraitItalic, attributes.emphasisAttributes))
+        
+        // Strong
+        addPattern("(\\*\\*|__)(?=\\S)(.+?[*_]*)(?<=\\S)\\1", attributesForTraits(.TraitBold, attributes.strongAttributes))
+        
+        // Inline code
+        addPattern("(`+)(.+?)(?<!`)\\1(?!`)", attributes.inlineCodeAttributes)
     }
     
     required public init(coder aDecoder: NSCoder) {
