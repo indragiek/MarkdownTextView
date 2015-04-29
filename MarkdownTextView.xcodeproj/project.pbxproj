@@ -16,6 +16,7 @@
 		72C40CC51AF01EA40058ABC5 /* RegularExpressionTextStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C40CC41AF01EA40058ABC5 /* RegularExpressionTextStorage.swift */; };
 		72CB4FD91AF03E74000B3993 /* MarkdownTextStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CB4FD81AF03E74000B3993 /* MarkdownTextStorage.swift */; };
 		72CB4FDB1AF04A43000B3993 /* MarkdownAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CB4FDA1AF04A43000B3993 /* MarkdownAttributes.swift */; };
+		72CB4FDD1AF09698000B3993 /* FontUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CB4FDC1AF09698000B3993 /* FontUtilities.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,7 @@
 		72C40CC41AF01EA40058ABC5 /* RegularExpressionTextStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegularExpressionTextStorage.swift; sourceTree = "<group>"; };
 		72CB4FD81AF03E74000B3993 /* MarkdownTextStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownTextStorage.swift; sourceTree = "<group>"; };
 		72CB4FDA1AF04A43000B3993 /* MarkdownAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownAttributes.swift; sourceTree = "<group>"; };
+		72CB4FDC1AF09698000B3993 /* FontUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontUtilities.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 				72C40CC41AF01EA40058ABC5 /* RegularExpressionTextStorage.swift */,
 				72CB4FD81AF03E74000B3993 /* MarkdownTextStorage.swift */,
 				72CB4FDA1AF04A43000B3993 /* MarkdownAttributes.swift */,
+				72CB4FDC1AF09698000B3993 /* FontUtilities.swift */,
 				728FA1431AEF28A400C7A368 /* Main.storyboard */,
 				728FA1461AEF28A400C7A368 /* Images.xcassets */,
 				728FA1481AEF28A400C7A368 /* LaunchScreen.xib */,
@@ -226,6 +229,7 @@
 				728FA1401AEF28A400C7A368 /* AppDelegate.swift in Sources */,
 				72C40CC51AF01EA40058ABC5 /* RegularExpressionTextStorage.swift in Sources */,
 				72CB4FDB1AF04A43000B3993 /* MarkdownAttributes.swift in Sources */,
+				72CB4FDD1AF09698000B3993 /* FontUtilities.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

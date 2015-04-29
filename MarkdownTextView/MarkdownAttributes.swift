@@ -48,13 +48,6 @@ public struct MarkdownAttributes {
         return UIFont(name: "Menlo", size: size) ?? UIFont(name: "Courier", size: size) ?? bodyFont
     }()
     
-    private static let IndentedParagraphStyle: NSParagraphStyle = {
-        let style = NSMutableParagraphStyle()
-        style.firstLineHeadIndent = 30
-        style.headIndent = 30
-        return style
-    }()
-    
     public var codeBlockAttributes: TextAttributes? = [
         NSFontAttributeName: MarkdownAttributes.MonospaceFont
     ]
@@ -63,16 +56,22 @@ public struct MarkdownAttributes {
         NSFontAttributeName: MarkdownAttributes.MonospaceFont
     ]
     
-    public var blockQuoteAttributes: TextAttributes? = [
-        NSParagraphStyleAttributeName: MarkdownAttributes.IndentedParagraphStyle
+    public var blockQuoteAttributes: TextAttributes?
+    
+    public var orderedListAttributes: TextAttributes? = [
+        NSFontAttributeName: fontWithTraits(.TraitBold, UIFont.preferredFontForTextStyle(UIFontTextStyleBody))
     ]
     
     public var orderedListItemAttributes: TextAttributes? = [
-        NSParagraphStyleAttributeName: MarkdownAttributes.IndentedParagraphStyle
+        NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+    ]
+    
+    public var unorderedListAttributes: TextAttributes? = [
+        NSFontAttributeName: fontWithTraits(.TraitBold, UIFont.preferredFontForTextStyle(UIFontTextStyleBody))
     ]
     
     public var unorderedListItemAttributes: TextAttributes? = [
-        NSParagraphStyleAttributeName: MarkdownAttributes.IndentedParagraphStyle
+        NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
     ]
     
     public func attributesForHeaderLevel(level: Int) -> TextAttributes? {

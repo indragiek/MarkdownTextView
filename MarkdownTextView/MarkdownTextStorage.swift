@@ -8,14 +8,6 @@
 
 import UIKit
 
-private func fontWithTraits(traits: UIFontDescriptorSymbolicTraits, font: UIFont) -> UIFont {
-    let combinedTraits = UIFontDescriptorSymbolicTraits(font.fontDescriptor().symbolicTraits.rawValue | (traits.rawValue & 0xFFFF))
-    if let descriptor = font.fontDescriptor().fontDescriptorWithSymbolicTraits(combinedTraits) {
-        return UIFont(descriptor: descriptor, size: font.pointSize)
-    }
-    return font
-}
-
 private func regexFromPattern(pattern: String) -> NSRegularExpression {
     var error: NSError?
     if let regex = NSRegularExpression(pattern: pattern, options: .AnchorsMatchLines, error: &error) {
@@ -25,11 +17,20 @@ private func regexFromPattern(pattern: String) -> NSRegularExpression {
     }
 }
 
+private func listItemRegexWithMarkerPattern(pattern: String) -> NSRegularExpression {
+    return regexFromPattern("(?:[ ]{0,3}(?:\(pattern))[ \t]+)(.+)")
+}
+
 public class MarkdownTextStorage: RegularExpressionTextStorage {
     // Regular expressions are from John Gruber's original Markdown.pl
     // implementation (v1.0.1): http://daringfireball.net/projects/markdown/
+    //
+    // See the original source for documentation on these
+    // expressions.
     private static let HeaderRegex = regexFromPattern("^(\\#{1,6})[ \t]*(.+?)[ \t]*\\#*\n+")
     private static let LinkRegex = regexFromPattern("\\[([^\\[]+)\\]\\([ \t]*<?(.*?)>?[ \t]*((['\"])(.*?)\\4)?\\)")
+    private static let UnorderedListRegex = listItemRegexWithMarkerPattern("[*+-]")
+    private static let OrderedListRegex = listItemRegexWithMarkerPattern("\\d+[.]")
     
     private let attributes: MarkdownAttributes
     
@@ -69,6 +70,16 @@ public class MarkdownTextStorage: RegularExpressionTextStorage {
     override func highlightRange(range: NSRange) {
         highlightHeadersInRange(range)
         highlightLinksInRange(range)
+        highlightListsInRange(range,
+            regex: self.dynamicType.UnorderedListRegex,
+            attributes: attributes.unorderedListAttributes,
+            itemAttributes: attributes.unorderedListItemAttributes
+        )
+        highlightListsInRange(range,
+            regex: self.dynamicType.OrderedListRegex,
+            attributes: attributes.orderedListAttributes,
+            itemAttributes: attributes.orderedListItemAttributes
+        )
         super.highlightRange(range)
     }
     
@@ -88,6 +99,19 @@ public class MarkdownTextStorage: RegularExpressionTextStorage {
                 NSLinkAttributeName: URLString
             ]
             self.addAttributes(linkAttributes, range: result.rangeAtIndex(0))
+        }
+    }
+    
+    private func highlightListsInRange(range: NSRange, regex: NSRegularExpression, attributes: MarkdownAttributes.TextAttributes?, itemAttributes: MarkdownAttributes.TextAttributes?) {
+        if (attributes == nil && itemAttributes == nil) { return }
+        
+        regex.enumerateMatchesInString(string, options: nil, range: range) { (result, _, _) in
+            if let attributes = attributes {
+                self.addAttributes(attributes, range: result.range)
+            }
+            if let itemAttributes = itemAttributes {
+                self.addAttributes(itemAttributes, range: result.rangeAtIndex(1))
+            }
         }
     }
     
