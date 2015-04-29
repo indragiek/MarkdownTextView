@@ -11,17 +11,7 @@ import UIKit
 /**
 *  Text storage with support for highlighting Markdown.
 */
-public class MarkdownTextStorage: RegularExpressionTextStorage {
-    // Regular expressions are from John Gruber's original Markdown.pl
-    // implementation (v1.0.1): http://daringfireball.net/projects/markdown/
-    //
-    // See the original source for documentation on these
-    // expressions.
-    private static let HeaderRegex = regexFromPattern("^(\\#{1,6})[ \t]*(?:.+?)[ \t]*\\#*\n+")
-    private static let LinkRegex = regexFromPattern("\\[([^\\[]+)\\]\\([ \t]*<?(.*?)>?[ \t]*((['\"])(.*?)\\4)?\\)")
-    private static let UnorderedListRegex = listItemRegexWithMarkerPattern("[*+-]")
-    private static let OrderedListRegex = listItemRegexWithMarkerPattern("\\d+[.]")
-    
+public class MarkdownTextStorage: HighlighterTextStorage {
     private let attributes: MarkdownAttributes
     
     // MARK: Initialization
@@ -38,6 +28,15 @@ public class MarkdownTextStorage: RegularExpressionTextStorage {
         super.init()
         defaultAttributes = attributes.defaultAttributes
         
+        if let headerAttributes = attributes.headerAttributes {
+            addHighlighter(MarkdownHeaderHighlighter(attributes: headerAttributes))
+        }
+        addHighlighter(MarkdownLinkHighlighter())
+        addHighlighter(MarkdownListHighlighter(markerPattern: "[*+-]", attributes: attributes.unorderedListAttributes, itemAttributes: attributes.unorderedListItemAttributes))
+        addHighlighter(MarkdownListHighlighter(markerPattern: "\\d+[.]", attributes: attributes.orderedListAttributes, itemAttributes: attributes.orderedListItemAttributes))
+        
+        // From markdown.pl v1.0.1 <http://daringfireball.net/projects/markdown/>
+        
         // Code blocks
         addPattern("(?:\n\n|\\A)((?:(?:[ ]{4}|\t).*\n+)+)((?=^[ ]{0,4}\\S)|\\Z)", attributes.codeBlockAttributes)
         
@@ -46,10 +45,10 @@ public class MarkdownTextStorage: RegularExpressionTextStorage {
         
         // Se-text style headers
         // H1
-        addPattern("^(?:.+)[ \t]*\n=+[ \t]*\n+", attributes.h1Attributes)
+        addPattern("^(?:.+)[ \t]*\n=+[ \t]*\n+", attributes.headerAttributes?.h1Attributes)
         
         // H2
-        addPattern("^(?:.+)[ \t]*\n-+[ \t]*\n+", attributes.h2Attributes)
+        addPattern("^(?:.+)[ \t]*\n-+[ \t]*\n+", attributes.headerAttributes?.h2Attributes)
         
         // Emphasis
         addPattern("(\\*|_)(?=\\S)(.+?)(?<=\\S)\\1", attributesForTraits(.TraitItalic, attributes.emphasisAttributes))
@@ -65,61 +64,12 @@ public class MarkdownTextStorage: RegularExpressionTextStorage {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: RegularExpressionTextStorage
-    
-    override internal func highlightRange(range: NSRange) {
-        highlightHeadersInRange(range)
-        highlightLinksInRange(range)
-        highlightListsInRange(range,
-            regex: self.dynamicType.UnorderedListRegex,
-            attributes: attributes.unorderedListAttributes,
-            itemAttributes: attributes.unorderedListItemAttributes
-        )
-        highlightListsInRange(range,
-            regex: self.dynamicType.OrderedListRegex,
-            attributes: attributes.orderedListAttributes,
-            itemAttributes: attributes.orderedListItemAttributes
-        )
-        super.highlightRange(range)
-    }
-    
-    private func highlightHeadersInRange(range: NSRange) {
-        self.dynamicType.HeaderRegex.enumerateMatchesInString(string, options: nil, range: range) { (result, _, _) in
-            let level = result.rangeAtIndex(1).length
-            if let attributes = self.attributes.attributesForHeaderLevel(level) {
-                self.addAttributes(attributes, range: result.range)
-            }
-        }
-    }
-    
-    private func highlightLinksInRange(range: NSRange) {
-        self.dynamicType.LinkRegex.enumerateMatchesInString(string, options: nil, range: range) { (result, _, _) in
-            let URLString = (self.string as NSString).substringWithRange(result.rangeAtIndex(2))
-            let linkAttributes = [
-                NSLinkAttributeName: URLString
-            ]
-            self.addAttributes(linkAttributes, range: result.rangeAtIndex(0))
-        }
-    }
-    
-    private func highlightListsInRange(range: NSRange, regex: NSRegularExpression, attributes: TextAttributes?, itemAttributes: TextAttributes?) {
-        if (attributes == nil && itemAttributes == nil) { return }
-        
-        regex.enumerateMatchesInString(string, options: nil, range: range) { (result, _, _) in
-            if let attributes = attributes {
-                self.addAttributes(attributes, range: result.range)
-            }
-            if let itemAttributes = itemAttributes {
-                self.addAttributes(itemAttributes, range: result.rangeAtIndex(1))
-            }
-        }
-    }
-    
     // MARK: Helpers
     
     private func addPattern(pattern: String, _ attributes: TextAttributes?) {
         if let attributes = attributes {
-            self.addRegularExpression(regexFromPattern(pattern), withAttributes: attributes)
+            let highlighter = RegularExpressionHighlighter(regularExpression: regexFromPattern(pattern), attributes: attributes)
+            addHighlighter(highlighter)
         }
     }
     
@@ -131,17 +81,4 @@ public class MarkdownTextStorage: RegularExpressionTextStorage {
         }
         return attributes
     }
-}
-
-private func regexFromPattern(pattern: String) -> NSRegularExpression {
-    var error: NSError?
-    if let regex = NSRegularExpression(pattern: pattern, options: .AnchorsMatchLines, error: &error) {
-        return regex
-    } else {
-        fatalError("Failed to initialize regular expression with pattern \(pattern): \(error)")
-    }
-}
-
-private func listItemRegexWithMarkerPattern(pattern: String) -> NSRegularExpression {
-    return regexFromPattern("^(?:[ ]{0,3}(?:\(pattern))[ \t]+)(.+)\n")
 }

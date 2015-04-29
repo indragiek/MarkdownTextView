@@ -9,17 +9,12 @@
 import UIKit
 
 /**
-*  Text storage with support for automatically styling text
-*  by matching a set of regular expressions.
+*  Text storage with support for automatically highlighting text
+*  as it changes.
 */
-public class RegularExpressionTextStorage: NSTextStorage {
-    private struct Expression {
-        let regex: NSRegularExpression
-        let attributes: [String: AnyObject]
-    }
-    
+public class HighlighterTextStorage: NSTextStorage {
     private let backingStore: NSMutableAttributedString
-    private var expressions = [Expression]()
+    private var highlighters = [HighlighterType]()
     
     /// Default attributes to use for styling text.
     public var defaultAttributes: [String: AnyObject] = [
@@ -31,17 +26,14 @@ public class RegularExpressionTextStorage: NSTextStorage {
     // MARK: API
     
     /**
-    Adds a regular expression to use for matching text to style.
+    Adds a highlighter to use for highlighting text.
     
-    Regular expressions are evaluated in the order in which they
-    are added.
+    Highlighters are invoked in the order in which they are added.
     
-    :param: expression The regular expression.
-    :param: attributes The text attributes to apply to range(s) of
-    text that match the regular expression.
+    :param: highlighter The highlighter to add.
     */
-    public func addRegularExpression(expression: NSRegularExpression, withAttributes attributes: [String: AnyObject]) {
-        expressions.append(Expression(regex: expression, attributes: attributes))
+    public func addHighlighter(highlighter: HighlighterType) {
+        highlighters.append(highlighter)
         editedAll(.EditedAttributes)
     }
     
@@ -84,7 +76,7 @@ public class RegularExpressionTextStorage: NSTextStorage {
         // for small amounts of text (which is the use case that
         // this was designed for), but would need to be optimized
         // for any kind of heavy editing.
-        _highlightRange(NSRange(location: 0, length: (string as NSString).length))
+        highlightRange(NSRange(location: 0, length: (string as NSString).length))
         super.processEditing()
     }
     
@@ -92,18 +84,14 @@ public class RegularExpressionTextStorage: NSTextStorage {
         edited(actions, range: NSRange(location: 0, length: backingStore.length), changeInLength: 0)
     }
     
-    private func _highlightRange(range: NSRange) {
+    private func highlightRange(range: NSRange) {
         backingStore.beginEditing()
         setAttributes(defaultAttributes, range: range)
-        highlightRange(range)
-        backingStore.endEditing()
-    }
-    
-    internal func highlightRange(range: NSRange) {
-        for expression in expressions {
-            expression.regex.enumerateMatchesInString(string, options: nil, range: range) { (result, _, _) in
-                self.addAttributes(expression.attributes, range: result.range)
-            }
+        var attrString = backingStore.attributedSubstringFromRange(range).mutableCopy() as! NSMutableAttributedString
+        for highlighter in highlighters {
+            highlighter.highlightAttributedString(attrString)
         }
+        replaceCharactersInRange(range, withAttributedString: attrString)
+        backingStore.endEditing()
     }
 }

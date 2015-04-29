@@ -8,8 +8,6 @@
 
 import UIKit
 
-public typealias TextAttributes = [String: AnyObject]
-
 /**
 *  Encapsulates the attributes to use for styling various types
 *  of Markdown elements.
@@ -22,29 +20,45 @@ public struct MarkdownAttributes {
     public var strongAttributes: TextAttributes?
     public var emphasisAttributes: TextAttributes?
     
-    public var h1Attributes: TextAttributes? = [
-        NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
-    ]
+    public struct HeaderAttributes {
+        public var h1Attributes: TextAttributes? = [
+            NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+        ]
+        
+        public var h2Attributes: TextAttributes? = [
+            NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+        ]
+        
+        public var h3Attributes: TextAttributes? = [
+            NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+        ]
+        
+        public var h4Attributes: TextAttributes? = [
+            NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
+        ]
+        
+        public var h5Attributes: TextAttributes? = [
+            NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
+        ]
+        
+        public var h6Attributes: TextAttributes? = [
+            NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
+        ]
+        
+        func attributesForHeaderLevel(level: Int) -> TextAttributes? {
+            switch level {
+            case 1: return h1Attributes
+            case 2: return h2Attributes
+            case 3: return h3Attributes
+            case 4: return h4Attributes
+            case 5: return h5Attributes
+            case 6: return h6Attributes
+            default: return nil
+            }
+        }
+    }
     
-    public var h2Attributes: TextAttributes? = [
-        NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
-    ]
-    
-    public var h3Attributes: TextAttributes? = [
-        NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
-    ]
-    
-    public var h4Attributes: TextAttributes? = [
-        NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
-    ]
-    
-    public var h5Attributes: TextAttributes? = [
-        NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
-    ]
-    
-    public var h6Attributes: TextAttributes? = [
-        NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
-    ]
+    public var headerAttributes: HeaderAttributes?
     
     private static let MonospaceFont: UIFont = {
         let bodyFont = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
@@ -81,16 +95,4 @@ public struct MarkdownAttributes {
         NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleBody),
         NSForegroundColorAttributeName: UIColor.darkGrayColor()
     ]
-    
-    internal func attributesForHeaderLevel(level: Int) -> TextAttributes? {
-        switch level {
-        case 1: return h1Attributes
-        case 2: return h2Attributes
-        case 3: return h3Attributes
-        case 4: return h4Attributes
-        case 5: return h5Attributes
-        case 6: return h6Attributes
-        default: return nil
-        }
-    }
 }
