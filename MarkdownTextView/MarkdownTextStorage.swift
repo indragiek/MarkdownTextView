@@ -44,6 +44,9 @@ public class MarkdownTextStorage: RegularExpressionTextStorage {
         // Code blocks
         addPattern("(?:\n\n|\\A)((?:(?:[ ]{4}|\t).*\n+)+)((?=^[ ]{0,4}\\S)|\\Z)", attributes.codeBlockAttributes)
         
+        // Block quotes
+        addPattern("(?:^[ \t]*>[ \t]?.+\n(.+\n)*\n*)+", attributes.blockQuoteAttributes)
+        
         // Se-text style headers
         // H1
         addPattern("^(?:.+)[ \t]*\n=+[ \t]*\n+", attributes.h1Attributes)

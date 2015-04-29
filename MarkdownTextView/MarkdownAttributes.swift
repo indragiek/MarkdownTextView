@@ -56,7 +56,9 @@ public struct MarkdownAttributes {
         NSFontAttributeName: MarkdownAttributes.MonospaceFont
     ]
     
-    public var blockQuoteAttributes: TextAttributes?
+    public var blockQuoteAttributes: TextAttributes? = [
+        NSForegroundColorAttributeName: UIColor.darkGrayColor()
+    ]
     
     public var orderedListAttributes: TextAttributes? = [
         NSFontAttributeName: fontWithTraits(.TraitBold, UIFont.preferredFontForTextStyle(UIFontTextStyleBody))
