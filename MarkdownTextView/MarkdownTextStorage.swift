@@ -16,13 +16,28 @@ private func fontWithTraits(traits: UIFontDescriptorSymbolicTraits, font: UIFont
     return font
 }
 
+private func regexFromPattern(pattern: String) -> NSRegularExpression {
+    var error: NSError?
+    if let regex = NSRegularExpression(pattern: pattern, options: .AnchorsMatchLines, error: &error) {
+        return regex
+    } else {
+        fatalError("Failed to initialize regular expression with pattern \(pattern): \(error)")
+    }
+}
+
 public class MarkdownTextStorage: RegularExpressionTextStorage {
+    // Regular expressions are from John Gruber's original Markdown.pl
+    // implementation (v1.0.1): http://daringfireball.net/projects/markdown/
+    private static let HeaderRegex = regexFromPattern("^(\\#{1,6})[ \\t]*(.+?)[ \\t]*\\#*\\n+")
+    
+    private let attributes: MarkdownAttributes
+    
+    // MARK: Initialization
+    
     public init(attributes: MarkdownAttributes = MarkdownAttributes()) {
+        self.attributes = attributes
         super.init()
         defaultAttributes = attributes.defaultAttributes
-        
-        // Regular expressions are from John Gruber's original Markdown.pl
-        // implementation (v1.0.1): http://daringfireball.net/projects/markdown/
         
         // Emphasis
         addPattern("(\\*|_)(?=\\S)(.+?)(?<=\\S)\\1", attributesForTraits(.TraitItalic, attributes.emphasisAttributes))
@@ -38,14 +53,29 @@ public class MarkdownTextStorage: RegularExpressionTextStorage {
         addPattern("^(.+)[ \t]*\n-+[ \t]*\n+", attributes.h2Attributes)
     }
     
+    required public init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: RegularExpressionTextStorage
+    
+    override func highlightRange(range: NSRange) {
+        // atx style headers
+        self.dynamicType.HeaderRegex.enumerateMatchesInString(string, options: nil, range: range) { (result, _, _) in
+            let level = result.rangeAtIndex(1).length
+            if let attributes = self.attributes.attributesForHeaderLevel(level) {
+                self.addAttributes(attributes, range: result.range)
+            }
+        }
+        
+        super.highlightRange(range)
+    }
+    
+    // MARK: Helpers
+    
     private func addPattern(pattern: String, _ attributes: MarkdownAttributes.TextAttributes?) {
         if let attributes = attributes {
-            var error: NSError?
-            if let regex = NSRegularExpression(pattern: pattern, options: .AnchorsMatchLines, error: &error) {
-                self.addRegularExpression(regex, withAttributes: attributes)
-            } else {
-                fatalError("Failed to initialize regular expression with pattern \(pattern): \(error)")
-            }
+            self.addRegularExpression(regexFromPattern(pattern), withAttributes: attributes)
         }
     }
     
@@ -56,9 +86,5 @@ public class MarkdownTextStorage: RegularExpressionTextStorage {
             ]
         }
         return attributes
-    }
-
-    required public init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

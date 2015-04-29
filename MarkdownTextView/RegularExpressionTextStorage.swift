@@ -19,14 +19,14 @@ public class RegularExpressionTextStorage: NSTextStorage {
     public var defaultAttributes: [String: AnyObject] = [
         NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
     ] {
-        didSet { editedAll() }
+        didSet { editedAll(.EditedAttributes) }
     }
     
     // MARK: API
     
     public func addRegularExpression(expression: NSRegularExpression, withAttributes attributes: [String: AnyObject]) {
         expressions.append(Expression(regex: expression, attributes: attributes))
-        editedAll()
+        editedAll(.EditedAttributes)
     }
     
     // MARK: Initialization
@@ -62,22 +62,32 @@ public class RegularExpressionTextStorage: NSTextStorage {
     }
     
     public override func processEditing() {
-        highlightRange(NSRange(location: 0, length: (backingStore.string as NSString).length))
+        // This is inefficient but necessary because certain
+        // edits can cause formatting changes that span beyond
+        // line or paragraph boundaries. This should be alright
+        // for small amounts of text (which is the use case that
+        // this was designed for), but would need to be optimized
+        // for any kind of heavy editing.
+        _highlightRange(NSRange(location: 0, length: (string as NSString).length))
         super.processEditing()
     }
     
-    private func editedAll() {
-        edited(.EditedAttributes, range: NSRange(location: 0, length: backingStore.length), changeInLength: 0)
+    private func editedAll(actions: NSTextStorageEditActions) {
+        edited(actions, range: NSRange(location: 0, length: backingStore.length), changeInLength: 0)
     }
     
-    private func highlightRange(range: NSRange) {
+    private func _highlightRange(range: NSRange) {
         backingStore.beginEditing()
         setAttributes(defaultAttributes, range: range)
+        highlightRange(range)
+        backingStore.endEditing()
+    }
+    
+    func highlightRange(range: NSRange) {
         for expression in expressions {
-            expression.regex.enumerateMatchesInString(backingStore.string, options: nil, range: range) { (result, _, _) in
+            expression.regex.enumerateMatchesInString(string, options: nil, range: range) { (result, _, _) in
                 self.addAttributes(expression.attributes, range: result.range)
             }
         }
-        backingStore.endEditing()
     }
 }
