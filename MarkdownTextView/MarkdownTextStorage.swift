@@ -26,7 +26,7 @@ public class MarkdownTextStorage: HighlighterTextStorage {
     public init(attributes: MarkdownAttributes = MarkdownAttributes()) {
         self.attributes = attributes
         super.init()
-        defaultAttributes = attributes.defaultAttributes
+        commonInit()
         
         if let headerAttributes = attributes.headerAttributes {
             addHighlighter(MarkdownHeaderHighlighter(attributes: headerAttributes))
@@ -63,6 +63,11 @@ public class MarkdownTextStorage: HighlighterTextStorage {
     required public init(coder aDecoder: NSCoder) {
         attributes = MarkdownAttributes()
         super.init(coder: aDecoder)
+        commonInit()
+    }
+    
+    private func commonInit() {
+        defaultAttributes = attributes.defaultAttributes
     }
     
     // MARK: Helpers
