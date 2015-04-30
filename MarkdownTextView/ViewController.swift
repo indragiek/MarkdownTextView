@@ -9,14 +9,11 @@
 import UIKit
 
 class ViewController: UIViewController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        let textContainer = NSTextContainer()
-        let layoutManager = NSLayoutManager()
-        layoutManager.addTextContainer(textContainer)
         
-        let textStorage = MarkdownTextStorage()
+        let attributes = MarkdownAttributes()
+        let textStorage = MarkdownTextStorage(attributes: attributes)
         var error: NSError?
         if let linkHighlighter = LinkHighlighter(errorPtr: &error) {
             textStorage.addHighlighter(linkHighlighter)
@@ -25,10 +22,11 @@ class ViewController: UIViewController {
         }
         textStorage.addHighlighter(MarkdownStrikethroughHighlighter())
         textStorage.addHighlighter(MarkdownSuperscriptHighlighter())
-        textStorage.addHighlighter(MarkdownFencedCodeHighlighter(attributes: MarkdownAttributes().codeBlockAttributes!))
-        textStorage.addLayoutManager(layoutManager)
+        if let codeBlockAttributes = attributes.codeBlockAttributes {
+            textStorage.addHighlighter(MarkdownFencedCodeHighlighter(attributes: codeBlockAttributes))
+        }
         
-        let textView = UITextView(frame: CGRectZero, textContainer: textContainer)
+        let textView = MarkdownTextView(frame: CGRectZero, textStorage: textStorage)
         textView.setTranslatesAutoresizingMaskIntoConstraints(false)
         view.addSubview(textView)
         
