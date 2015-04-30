@@ -56,6 +56,8 @@ public struct MarkdownAttributes {
             default: return nil
             }
         }
+        
+        public init() {}
     }
     
     public var headerAttributes: HeaderAttributes? = HeaderAttributes()
@@ -95,4 +97,6 @@ public struct MarkdownAttributes {
         NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleBody),
         NSForegroundColorAttributeName: UIColor.darkGrayColor()
     ]
+    
+    public init() {}
 }
