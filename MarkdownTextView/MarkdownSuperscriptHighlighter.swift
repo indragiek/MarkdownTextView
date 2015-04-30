@@ -12,7 +12,7 @@ import UIKit
 *  Highlights super^script in Markdown text (unofficial extension)
 */
 public final class MarkdownSuperscriptHighlighter: HighlighterType {
-    private static let SuperscriptRegex = regexFromPattern("(\\^+)(?:(?:[^\\^\\s\\(][^\\^\\s]+)|(?:\\([^\n\r\\)]+\\)))")
+    private static let SuperscriptRegex = regexFromPattern("(\\^+)(?:(?:[^\\^\\s\\(][^\\^\\s]*)|(?:\\([^\n\r\\)]+\\)))")
     private let fontSizeRatio: CGFloat
     
     /**
