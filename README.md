@@ -41,7 +41,7 @@ view.addSubview(textView)
 
 Extension classes conforming to the `HighlighterType` protocol can be used to add support for unofficial Markdown extensions. The framework comes with the following extensions already implemented:
 
-From [Github Flavored Markdown](https://help.github.com/articles/github-flavored-markdown/)):
+From [Github Flavored Markdown](https://help.github.com/articles/github-flavored-markdown/):
 
 * `MarkdownStrikethroughHighlighter` - Support for `~~strikethrough~~`
 * `MarkdownFencedCodeHighlighter` - Support for fenced code blocks
