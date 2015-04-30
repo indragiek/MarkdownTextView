@@ -12,7 +12,7 @@ import UIKit
 *  Highlighter that uses a regular expression to match character
 *  sequences to highlight.
 */
-public final class RegularExpressionHighlighter: HighlighterType {
+public class RegularExpressionHighlighter: HighlighterType {
     private let regularExpression: NSRegularExpression
     private let attributes: TextAttributes
     

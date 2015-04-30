@@ -25,6 +25,7 @@ class ViewController: UIViewController {
         }
         textStorage.addHighlighter(MarkdownStrikethroughHighlighter())
         textStorage.addHighlighter(MarkdownSuperscriptHighlighter())
+        textStorage.addHighlighter(MarkdownFencedCodeHighlighter(attributes: MarkdownAttributes().codeBlockAttributes!))
         textStorage.addLayoutManager(layoutManager)
         
         let textView = UITextView(frame: CGRectZero, textContainer: textContainer)
