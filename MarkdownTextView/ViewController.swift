@@ -24,6 +24,7 @@ class ViewController: UIViewController {
             assertionFailure("Error initializing LinkHighlighter: \(error)")
         }
         textStorage.addHighlighter(MarkdownStrikethroughHighlighter())
+        textStorage.addHighlighter(MarkdownSuperscriptHighlighter())
         textStorage.addLayoutManager(layoutManager)
         
         let textView = UITextView(frame: CGRectZero, textContainer: textContainer)

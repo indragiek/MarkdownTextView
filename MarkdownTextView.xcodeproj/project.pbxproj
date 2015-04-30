@@ -14,6 +14,7 @@
 		7252E0181AF1801D006D0535 /* MarkdownListHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7252E0171AF1801D006D0535 /* MarkdownListHighlighter.swift */; };
 		7252E01A1AF1833C006D0535 /* LinkHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7252E0191AF1833C006D0535 /* LinkHighlighter.swift */; };
 		7252E01C1AF18AC6006D0535 /* MarkdownStrikethroughHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7252E01B1AF18AC6006D0535 /* MarkdownStrikethroughHighlighter.swift */; };
+		7252E01E1AF18E20006D0535 /* MarkdownSuperscriptHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7252E01D1AF18E20006D0535 /* MarkdownSuperscriptHighlighter.swift */; };
 		728FA1401AEF28A400C7A368 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728FA13F1AEF28A400C7A368 /* AppDelegate.swift */; };
 		728FA1421AEF28A400C7A368 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728FA1411AEF28A400C7A368 /* ViewController.swift */; };
 		728FA1451AEF28A400C7A368 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 728FA1431AEF28A400C7A368 /* Main.storyboard */; };
@@ -44,6 +45,7 @@
 		7252E0171AF1801D006D0535 /* MarkdownListHighlighter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownListHighlighter.swift; sourceTree = "<group>"; };
 		7252E0191AF1833C006D0535 /* LinkHighlighter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkHighlighter.swift; sourceTree = "<group>"; };
 		7252E01B1AF18AC6006D0535 /* MarkdownStrikethroughHighlighter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownStrikethroughHighlighter.swift; sourceTree = "<group>"; };
+		7252E01D1AF18E20006D0535 /* MarkdownSuperscriptHighlighter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownSuperscriptHighlighter.swift; sourceTree = "<group>"; };
 		728FA13A1AEF28A400C7A368 /* MarkdownTextView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarkdownTextView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		728FA13E1AEF28A400C7A368 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		728FA13F1AEF28A400C7A368 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 				7252E0151AF17F30006D0535 /* MarkdownLinkHighlighter.swift */,
 				7252E0171AF1801D006D0535 /* MarkdownListHighlighter.swift */,
 				7252E01B1AF18AC6006D0535 /* MarkdownStrikethroughHighlighter.swift */,
+				7252E01D1AF18E20006D0535 /* MarkdownSuperscriptHighlighter.swift */,
 				72CB4FDC1AF09698000B3993 /* TextUtilities.swift */,
 				728FA1431AEF28A400C7A368 /* Main.storyboard */,
 				728FA1461AEF28A400C7A368 /* Images.xcassets */,
@@ -246,6 +249,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7252E0141AF17D01006D0535 /* MarkdownHeaderHighlighter.swift in Sources */,
+				7252E01E1AF18E20006D0535 /* MarkdownSuperscriptHighlighter.swift in Sources */,
 				7252E01A1AF1833C006D0535 /* LinkHighlighter.swift in Sources */,
 				728FA1421AEF28A400C7A368 /* ViewController.swift in Sources */,
 				7252E0161AF17F30006D0535 /* MarkdownLinkHighlighter.swift in Sources */,
