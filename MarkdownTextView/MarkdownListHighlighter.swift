@@ -38,7 +38,7 @@ public final class MarkdownListHighlighter: HighlighterType {
     public func highlightAttributedString(attributedString: NSMutableAttributedString) {
         if (attributes == nil && itemAttributes == nil) { return }
         
-        enumerateMatches(regularExpression, attributedString.string) {
+        enumerateMatches(regularExpression, string: attributedString.string) {
             if let attributes = self.attributes {
                 attributedString.addAttributes(attributes, range: $0.range)
             }

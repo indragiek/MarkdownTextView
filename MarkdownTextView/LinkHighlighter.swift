@@ -14,22 +14,14 @@ import UIKit
 public final class LinkHighlighter: HighlighterType {
     private var detector: NSDataDetector!
     
-    public init?(errorPtr: NSErrorPointer) {
-        var error: NSError?
-        if let detector = NSDataDetector(types: NSTextCheckingType.Link.rawValue, error: &error) {
-            self.detector = detector
-        } else {
-            if (errorPtr != nil) {
-                errorPtr.memory = error
-            }
-            return nil
-        }
+    public init() throws {
+        detector = try NSDataDetector(types: NSTextCheckingType.Link.rawValue)
     }
     
     // MARK: HighlighterType
     
     public func highlightAttributedString(attributedString: NSMutableAttributedString) {
-        enumerateMatches(detector, attributedString.string) {
+        enumerateMatches(detector, string: attributedString.string) {
             if let URL = $0.URL {
                 let linkAttributes = [
                     NSLinkAttributeName: URL

@@ -34,7 +34,7 @@ public class RegularExpressionHighlighter: HighlighterType {
     // MARK: HighlighterType
     
     public func highlightAttributedString(attributedString: NSMutableAttributedString) {
-        enumerateMatches(regularExpression, attributedString.string) {
+        enumerateMatches(regularExpression, string: attributedString.string) {
             attributedString.addAttributes(self.attributes, range: $0.range)
         }
     }

@@ -30,7 +30,7 @@ public final class MarkdownHeaderHighlighter: HighlighterType {
     // MARK: HighlighterType
     
     public func highlightAttributedString(attributedString: NSMutableAttributedString) {
-        enumerateMatches(self.dynamicType.HeaderRegex, attributedString.string) {
+        enumerateMatches(self.dynamicType.HeaderRegex, string: attributedString.string) {
             let level = $0.rangeAtIndex(1).length
             if let attributes = self.attributes.attributesForHeaderLevel(level) {
                 attributedString.addAttributes(attributes, range: $0.range)

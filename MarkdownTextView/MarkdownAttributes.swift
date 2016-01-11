@@ -81,7 +81,7 @@ public struct MarkdownAttributes {
     ]
     
     public var orderedListAttributes: TextAttributes? = [
-        NSFontAttributeName: fontWithTraits(.TraitBold, UIFont.preferredFontForTextStyle(UIFontTextStyleBody))
+        NSFontAttributeName: fontWithTraits(.TraitBold, font: UIFont.preferredFontForTextStyle(UIFontTextStyleBody))
     ]
     
     public var orderedListItemAttributes: TextAttributes? = [
@@ -90,7 +90,7 @@ public struct MarkdownAttributes {
     ]
     
     public var unorderedListAttributes: TextAttributes? = [
-        NSFontAttributeName: fontWithTraits(.TraitBold, UIFont.preferredFontForTextStyle(UIFontTextStyleBody))
+        NSFontAttributeName: fontWithTraits(.TraitBold, font: UIFont.preferredFontForTextStyle(UIFontTextStyleBody))
     ]
     
     public var unorderedListItemAttributes: TextAttributes? = [

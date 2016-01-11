@@ -30,7 +30,7 @@ public final class MarkdownStrikethroughHighlighter: HighlighterType {
     // MARK: HighlighterType
     
     public func highlightAttributedString(attributedString: NSMutableAttributedString) {
-        enumerateMatches(self.dynamicType.StrikethroughRegex, attributedString.string) {
+        enumerateMatches(self.dynamicType.StrikethroughRegex, string: attributedString.string) {
             var strikethroughAttributes: TextAttributes = [
                 NSStrikethroughStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue
             ]

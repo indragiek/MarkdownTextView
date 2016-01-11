@@ -44,7 +44,7 @@ public class HighlighterTextStorage: NSTextStorage {
         super.init()
     }
 
-    required public init(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         backingStore = NSMutableAttributedString(string: "", attributes: defaultAttributes)
         super.init(coder: aDecoder)
     }
@@ -55,7 +55,7 @@ public class HighlighterTextStorage: NSTextStorage {
         return backingStore.string
     }
     
-    public override func attributesAtIndex(location: Int, effectiveRange range: NSRangePointer) -> [NSObject : AnyObject] {
+    public override func attributesAtIndex(location: Int, effectiveRange range: NSRangePointer) -> [String : AnyObject] {
         return backingStore.attributesAtIndex(location, effectiveRange: range)
     }
     
@@ -64,7 +64,7 @@ public class HighlighterTextStorage: NSTextStorage {
         edited(.EditedCharacters, range: range, changeInLength: attrString.length - range.length)
     }
     
-    public override func setAttributes(attrs: [NSObject : AnyObject]?, range: NSRange) {
+    public override func setAttributes(attrs: [String : AnyObject]?, range: NSRange) {
         backingStore.setAttributes(attrs, range: range)
         edited(.EditedAttributes, range: range, changeInLength: 0)
     }
@@ -87,7 +87,7 @@ public class HighlighterTextStorage: NSTextStorage {
     private func highlightRange(range: NSRange) {
         backingStore.beginEditing()
         setAttributes(defaultAttributes, range: range)
-        var attrString = backingStore.attributedSubstringFromRange(range).mutableCopy() as! NSMutableAttributedString
+        let attrString = backingStore.attributedSubstringFromRange(range).mutableCopy() as! NSMutableAttributedString
         for highlighter in highlighters {
             highlighter.highlightAttributedString(attrString)
         }
