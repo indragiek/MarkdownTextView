@@ -11,6 +11,18 @@
 
 Check out the includeded Example app to try out the text view and to see how **MarkdownTextView** is integrated into the project.
 
+### Installation
+
+###### With [CocoaPods](https://cocoapods.org/):
+```ruby
+pod "MarkdownTextView"
+```
+
+###### With [Carthage](https://github.com/Carthage/Carthage):
+```swift
+github "indragiek/MarkdownTextView"
+```
+
 ### Getting Started
 
 The simplest possible usage is as follows:
