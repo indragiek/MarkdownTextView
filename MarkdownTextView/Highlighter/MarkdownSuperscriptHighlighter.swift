@@ -45,7 +45,7 @@ public final class MarkdownSuperscriptHighlighter: HighlighterType {
                 return false
             }()
             if isConsecutiveRange {
-                level++
+                level += 1
             }
             
             attributedString.addAttributes(superscriptAttributes(attributes, level: level, ratio: self.fontSizeRatio), range: textRange)

@@ -79,12 +79,14 @@ public class MarkdownTextStorage: HighlighterTextStorage {
         }
     }
     
-    private func attributesForTraits(traits: UIFontDescriptorSymbolicTraits, var _ attributes: TextAttributes?) -> TextAttributes? {
+    private func attributesForTraits(traits: UIFontDescriptorSymbolicTraits, _ attributes: TextAttributes?) -> TextAttributes? {
+        var newAttributes = attributes
+        
         if let defaultFont = defaultAttributes[NSFontAttributeName] as? UIFont where attributes == nil {
-            attributes = [
+            newAttributes = [
                 NSFontAttributeName: fontWithTraits(traits, font: defaultFont)
             ]
         }
-        return attributes
+        return newAttributes
     }
 }
