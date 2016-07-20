@@ -10,8 +10,13 @@ import UIKit
 import MarkdownTextView
 
 class ViewController: UIViewController {
+    var textView: MarkdownTextView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "print", style: .Plain, target: self, action: #selector(self.printAction))
+        
         
         let attributes = MarkdownAttributes()
         let textStorage = MarkdownTextStorage(attributes: attributes)
@@ -26,7 +31,7 @@ class ViewController: UIViewController {
             textStorage.addHighlighter(MarkdownFencedCodeHighlighter(attributes: codeBlockAttributes))
         }
         
-        let textView = MarkdownTextView(frame: CGRectZero, textStorage: textStorage)
+        textView = MarkdownTextView(frame: CGRectZero, textStorage: textStorage)
         textView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(textView)
         
@@ -34,5 +39,13 @@ class ViewController: UIViewController {
         var constraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-20-[textView]-20-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views)
         constraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-20-[textView]-20-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views)
         NSLayoutConstraint.activateConstraints(constraints)
+    }
+    
+    func printAction() {
+        let text = textView.text
+        print("text: \n\(text)")
+        
+        let attrText = textView.attributedText
+        print("attr text: \n\(attrText)")
     }
 }

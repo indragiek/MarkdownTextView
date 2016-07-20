@@ -12,17 +12,9 @@
 		7252E0401AF1BC1E006D0535 /* MarkdownTextViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7252E03F1AF1BC1E006D0535 /* MarkdownTextViewTests.swift */; };
 		7252E0571AF1BCD0006D0535 /* HighlighterTextStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7252E0491AF1BCD0006D0535 /* HighlighterTextStorage.swift */; };
 		7252E0581AF1BCD0006D0535 /* HighlighterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7252E04A1AF1BCD0006D0535 /* HighlighterType.swift */; };
-		7252E0591AF1BCD0006D0535 /* LinkHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7252E04B1AF1BCD0006D0535 /* LinkHighlighter.swift */; };
 		7252E05A1AF1BCD0006D0535 /* MarkdownAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7252E04C1AF1BCD0006D0535 /* MarkdownAttributes.swift */; };
-		7252E05B1AF1BCD0006D0535 /* MarkdownFencedCodeHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7252E04D1AF1BCD0006D0535 /* MarkdownFencedCodeHighlighter.swift */; };
-		7252E05C1AF1BCD0006D0535 /* MarkdownHeaderHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7252E04E1AF1BCD0006D0535 /* MarkdownHeaderHighlighter.swift */; };
-		7252E05D1AF1BCD0006D0535 /* MarkdownLinkHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7252E04F1AF1BCD0006D0535 /* MarkdownLinkHighlighter.swift */; };
-		7252E05E1AF1BCD0006D0535 /* MarkdownListHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7252E0501AF1BCD0006D0535 /* MarkdownListHighlighter.swift */; };
-		7252E05F1AF1BCD1006D0535 /* MarkdownStrikethroughHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7252E0511AF1BCD0006D0535 /* MarkdownStrikethroughHighlighter.swift */; };
-		7252E0601AF1BCD1006D0535 /* MarkdownSuperscriptHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7252E0521AF1BCD0006D0535 /* MarkdownSuperscriptHighlighter.swift */; };
 		7252E0611AF1BCD1006D0535 /* MarkdownTextStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7252E0531AF1BCD0006D0535 /* MarkdownTextStorage.swift */; };
 		7252E0621AF1BCD1006D0535 /* MarkdownTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7252E0541AF1BCD0006D0535 /* MarkdownTextView.swift */; };
-		7252E0631AF1BCD1006D0535 /* RegularExpressionHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7252E0551AF1BCD0006D0535 /* RegularExpressionHighlighter.swift */; };
 		7252E0641AF1BCD1006D0535 /* TextUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7252E0561AF1BCD0006D0535 /* TextUtilities.swift */; };
 		7252E06E1AF1BD61006D0535 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7252E06D1AF1BD61006D0535 /* AppDelegate.swift */; };
 		7252E0701AF1BD61006D0535 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7252E06F1AF1BD61006D0535 /* ViewController.swift */; };
@@ -31,6 +23,14 @@
 		7252E0781AF1BD61006D0535 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7252E0761AF1BD61006D0535 /* LaunchScreen.xib */; };
 		7252E08D1AF1BD86006D0535 /* MarkdownTextView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7252E02D1AF1BC1D006D0535 /* MarkdownTextView.framework */; };
 		7252E08F1AF1BD93006D0535 /* MarkdownTextView.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 7252E02D1AF1BC1D006D0535 /* MarkdownTextView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B9B0D06A1D3F666200DF24DA /* LinkHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B0D0621D3F666200DF24DA /* LinkHighlighter.swift */; };
+		B9B0D06B1D3F666200DF24DA /* MarkdownFencedCodeHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B0D0631D3F666200DF24DA /* MarkdownFencedCodeHighlighter.swift */; };
+		B9B0D06C1D3F666200DF24DA /* MarkdownHeaderHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B0D0641D3F666200DF24DA /* MarkdownHeaderHighlighter.swift */; };
+		B9B0D06D1D3F666200DF24DA /* MarkdownLinkHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B0D0651D3F666200DF24DA /* MarkdownLinkHighlighter.swift */; };
+		B9B0D06E1D3F666200DF24DA /* MarkdownListHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B0D0661D3F666200DF24DA /* MarkdownListHighlighter.swift */; };
+		B9B0D06F1D3F666200DF24DA /* MarkdownStrikethroughHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B0D0671D3F666200DF24DA /* MarkdownStrikethroughHighlighter.swift */; };
+		B9B0D0701D3F666200DF24DA /* MarkdownSuperscriptHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B0D0681D3F666200DF24DA /* MarkdownSuperscriptHighlighter.swift */; };
+		B9B0D0711D3F666200DF24DA /* RegularExpressionHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B0D0691D3F666200DF24DA /* RegularExpressionHighlighter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,17 +73,9 @@
 		7252E03F1AF1BC1E006D0535 /* MarkdownTextViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownTextViewTests.swift; sourceTree = "<group>"; };
 		7252E0491AF1BCD0006D0535 /* HighlighterTextStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighlighterTextStorage.swift; sourceTree = "<group>"; };
 		7252E04A1AF1BCD0006D0535 /* HighlighterType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighlighterType.swift; sourceTree = "<group>"; };
-		7252E04B1AF1BCD0006D0535 /* LinkHighlighter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkHighlighter.swift; sourceTree = "<group>"; };
 		7252E04C1AF1BCD0006D0535 /* MarkdownAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownAttributes.swift; sourceTree = "<group>"; };
-		7252E04D1AF1BCD0006D0535 /* MarkdownFencedCodeHighlighter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownFencedCodeHighlighter.swift; sourceTree = "<group>"; };
-		7252E04E1AF1BCD0006D0535 /* MarkdownHeaderHighlighter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownHeaderHighlighter.swift; sourceTree = "<group>"; };
-		7252E04F1AF1BCD0006D0535 /* MarkdownLinkHighlighter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownLinkHighlighter.swift; sourceTree = "<group>"; };
-		7252E0501AF1BCD0006D0535 /* MarkdownListHighlighter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownListHighlighter.swift; sourceTree = "<group>"; };
-		7252E0511AF1BCD0006D0535 /* MarkdownStrikethroughHighlighter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownStrikethroughHighlighter.swift; sourceTree = "<group>"; };
-		7252E0521AF1BCD0006D0535 /* MarkdownSuperscriptHighlighter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownSuperscriptHighlighter.swift; sourceTree = "<group>"; };
 		7252E0531AF1BCD0006D0535 /* MarkdownTextStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownTextStorage.swift; sourceTree = "<group>"; };
 		7252E0541AF1BCD0006D0535 /* MarkdownTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownTextView.swift; sourceTree = "<group>"; };
-		7252E0551AF1BCD0006D0535 /* RegularExpressionHighlighter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegularExpressionHighlighter.swift; sourceTree = "<group>"; };
 		7252E0561AF1BCD0006D0535 /* TextUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextUtilities.swift; sourceTree = "<group>"; };
 		7252E0691AF1BD61006D0535 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7252E06C1AF1BD61006D0535 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -92,6 +84,14 @@
 		7252E0721AF1BD61006D0535 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7252E0741AF1BD61006D0535 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		7252E0771AF1BD61006D0535 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		B9B0D0621D3F666200DF24DA /* LinkHighlighter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkHighlighter.swift; sourceTree = "<group>"; };
+		B9B0D0631D3F666200DF24DA /* MarkdownFencedCodeHighlighter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownFencedCodeHighlighter.swift; sourceTree = "<group>"; };
+		B9B0D0641D3F666200DF24DA /* MarkdownHeaderHighlighter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownHeaderHighlighter.swift; sourceTree = "<group>"; };
+		B9B0D0651D3F666200DF24DA /* MarkdownLinkHighlighter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownLinkHighlighter.swift; sourceTree = "<group>"; };
+		B9B0D0661D3F666200DF24DA /* MarkdownListHighlighter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownListHighlighter.swift; sourceTree = "<group>"; };
+		B9B0D0671D3F666200DF24DA /* MarkdownStrikethroughHighlighter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownStrikethroughHighlighter.swift; sourceTree = "<group>"; };
+		B9B0D0681D3F666200DF24DA /* MarkdownSuperscriptHighlighter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownSuperscriptHighlighter.swift; sourceTree = "<group>"; };
+		B9B0D0691D3F666200DF24DA /* RegularExpressionHighlighter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegularExpressionHighlighter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,20 +145,13 @@
 			isa = PBXGroup;
 			children = (
 				7252E0321AF1BC1D006D0535 /* MarkdownTextView.h */,
-				7252E0491AF1BCD0006D0535 /* HighlighterTextStorage.swift */,
-				7252E04A1AF1BCD0006D0535 /* HighlighterType.swift */,
-				7252E04B1AF1BCD0006D0535 /* LinkHighlighter.swift */,
-				7252E04C1AF1BCD0006D0535 /* MarkdownAttributes.swift */,
-				7252E04D1AF1BCD0006D0535 /* MarkdownFencedCodeHighlighter.swift */,
-				7252E04E1AF1BCD0006D0535 /* MarkdownHeaderHighlighter.swift */,
-				7252E04F1AF1BCD0006D0535 /* MarkdownLinkHighlighter.swift */,
-				7252E0501AF1BCD0006D0535 /* MarkdownListHighlighter.swift */,
-				7252E0511AF1BCD0006D0535 /* MarkdownStrikethroughHighlighter.swift */,
-				7252E0521AF1BCD0006D0535 /* MarkdownSuperscriptHighlighter.swift */,
-				7252E0531AF1BCD0006D0535 /* MarkdownTextStorage.swift */,
 				7252E0541AF1BCD0006D0535 /* MarkdownTextView.swift */,
-				7252E0551AF1BCD0006D0535 /* RegularExpressionHighlighter.swift */,
+				7252E0531AF1BCD0006D0535 /* MarkdownTextStorage.swift */,
+				7252E04C1AF1BCD0006D0535 /* MarkdownAttributes.swift */,
+				7252E04A1AF1BCD0006D0535 /* HighlighterType.swift */,
+				7252E0491AF1BCD0006D0535 /* HighlighterTextStorage.swift */,
 				7252E0561AF1BCD0006D0535 /* TextUtilities.swift */,
+				B9B0D0611D3F663000DF24DA /* Highlighter */,
 				7252E0301AF1BC1D006D0535 /* Supporting Files */,
 			);
 			path = MarkdownTextView;
@@ -208,6 +201,21 @@
 				7252E06C1AF1BD61006D0535 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B9B0D0611D3F663000DF24DA /* Highlighter */ = {
+			isa = PBXGroup;
+			children = (
+				B9B0D0621D3F666200DF24DA /* LinkHighlighter.swift */,
+				B9B0D0631D3F666200DF24DA /* MarkdownFencedCodeHighlighter.swift */,
+				B9B0D0641D3F666200DF24DA /* MarkdownHeaderHighlighter.swift */,
+				B9B0D0651D3F666200DF24DA /* MarkdownLinkHighlighter.swift */,
+				B9B0D0661D3F666200DF24DA /* MarkdownListHighlighter.swift */,
+				B9B0D0671D3F666200DF24DA /* MarkdownStrikethroughHighlighter.swift */,
+				B9B0D0681D3F666200DF24DA /* MarkdownSuperscriptHighlighter.swift */,
+				B9B0D0691D3F666200DF24DA /* RegularExpressionHighlighter.swift */,
+			);
+			path = Highlighter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -352,20 +360,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9B0D06B1D3F666200DF24DA /* MarkdownFencedCodeHighlighter.swift in Sources */,
 				7252E0621AF1BCD1006D0535 /* MarkdownTextView.swift in Sources */,
-				7252E0631AF1BCD1006D0535 /* RegularExpressionHighlighter.swift in Sources */,
+				B9B0D06D1D3F666200DF24DA /* MarkdownLinkHighlighter.swift in Sources */,
+				B9B0D0711D3F666200DF24DA /* RegularExpressionHighlighter.swift in Sources */,
 				7252E0571AF1BCD0006D0535 /* HighlighterTextStorage.swift in Sources */,
+				B9B0D06C1D3F666200DF24DA /* MarkdownHeaderHighlighter.swift in Sources */,
 				7252E0641AF1BCD1006D0535 /* TextUtilities.swift in Sources */,
-				7252E05D1AF1BCD0006D0535 /* MarkdownLinkHighlighter.swift in Sources */,
+				B9B0D0701D3F666200DF24DA /* MarkdownSuperscriptHighlighter.swift in Sources */,
 				7252E05A1AF1BCD0006D0535 /* MarkdownAttributes.swift in Sources */,
-				7252E05B1AF1BCD0006D0535 /* MarkdownFencedCodeHighlighter.swift in Sources */,
-				7252E05C1AF1BCD0006D0535 /* MarkdownHeaderHighlighter.swift in Sources */,
-				7252E0591AF1BCD0006D0535 /* LinkHighlighter.swift in Sources */,
-				7252E05E1AF1BCD0006D0535 /* MarkdownListHighlighter.swift in Sources */,
+				B9B0D06A1D3F666200DF24DA /* LinkHighlighter.swift in Sources */,
+				B9B0D06E1D3F666200DF24DA /* MarkdownListHighlighter.swift in Sources */,
 				7252E0581AF1BCD0006D0535 /* HighlighterType.swift in Sources */,
-				7252E05F1AF1BCD1006D0535 /* MarkdownStrikethroughHighlighter.swift in Sources */,
 				7252E0611AF1BCD1006D0535 /* MarkdownTextStorage.swift in Sources */,
-				7252E0601AF1BCD1006D0535 /* MarkdownSuperscriptHighlighter.swift in Sources */,
+				B9B0D06F1D3F666200DF24DA /* MarkdownStrikethroughHighlighter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
