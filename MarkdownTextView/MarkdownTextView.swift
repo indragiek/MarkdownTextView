@@ -51,6 +51,7 @@ public class MarkdownTextView: UITextView, UITextViewDelegate {
     // Line header, contain space char.
     var markdownListItemMatch: String?
     var enterCompleteAtIndex: Int?
+    var textViewContentOffsetY: CGFloat?
 
     let markdownListRegularExpression = try! NSRegularExpression(pattern: "^[-*] .", options: .CaseInsensitive)
     let markdownNumberListRegularExpression = try! NSRegularExpression(pattern: "^\\d*\\. .", options: .CaseInsensitive)
@@ -58,6 +59,7 @@ public class MarkdownTextView: UITextView, UITextViewDelegate {
     public func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         markdownListItemMatch = nil
         enterCompleteAtIndex = nil
+        textViewContentOffsetY = nil
         
         if isReturn(text) {
             var objectLine = textView.text.substringToIndex(textView.text.startIndex.advancedBy(range.location))
@@ -73,9 +75,6 @@ public class MarkdownTextView: UITextView, UITextViewDelegate {
             let listMatches = markdownListRegularExpression.matchesInString(objectLine, options: [], range: objectLineRange)
             let numberListMatches = markdownNumberListRegularExpression.matchesInString(objectLine, options: [], range: objectLineRange)
             
-            print("objectLine: \(objectLine)")
-            print("listMatches: \(listMatches), numberListMatches: \(numberListMatches)")
-            
             if listMatches.count > 0 || numberListMatches.count > 0 {
                 enterCompleteAtIndex = range.location + 1
                 
@@ -88,6 +87,8 @@ public class MarkdownTextView: UITextView, UITextViewDelegate {
                 }
                 
                 markdownListItemMatch!.appendContentsOf(" ")
+                
+                textViewContentOffsetY = self.contentOffset.y
             }
         }
 
@@ -98,6 +99,8 @@ public class MarkdownTextView: UITextView, UITextViewDelegate {
         if markdownListItemMatch != nil {
             self.text.insertContentsOf(markdownListItemMatch!.characters, at: self.text.startIndex.advancedBy(enterCompleteAtIndex!))
             self.selectedRange = NSRange(location: enterCompleteAtIndex! + markdownListItemMatch!.characters.count, length: 0)
+            
+            self.setContentOffset(CGPoint(x: 0, y: textViewContentOffsetY!), animated: false)
         }
     }
 

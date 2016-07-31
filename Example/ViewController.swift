@@ -36,8 +36,8 @@ class ViewController: UIViewController {
         view.addSubview(textView)
         
         let views = ["textView": textView]
-        var constraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-20-[textView]-20-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views)
-        constraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-20-[textView]-20-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views)
+        var constraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[textView]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views)
+        constraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[textView]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views)
         NSLayoutConstraint.activateConstraints(constraints)
     }
     
