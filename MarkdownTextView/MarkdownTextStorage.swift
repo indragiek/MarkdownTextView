@@ -11,8 +11,8 @@ import UIKit
 /**
 *  Text storage with support for highlighting Markdown.
 */
-public class MarkdownTextStorage: HighlighterTextStorage {
-    private let attributes: MarkdownAttributes
+open class MarkdownTextStorage: HighlighterTextStorage {
+    fileprivate let attributes: MarkdownAttributes
     
     // MARK: Initialization
     
@@ -51,10 +51,10 @@ public class MarkdownTextStorage: HighlighterTextStorage {
         addPattern("^(?:.+)[ \t]*\n-+[ \t]*\n+", attributes.headerAttributes?.h2Attributes)
         
         // Emphasis
-        addPattern("(\\*|_)(?=\\S)(.+?)(?<=\\S)\\1", attributesForTraits(.TraitItalic, attributes.emphasisAttributes))
+        addPattern("(\\*|_)(?=\\S)(.+?)(?<=\\S)\\1", attributesForTraits(.traitItalic, attributes.emphasisAttributes))
         
         // Strong
-        addPattern("(\\*\\*|__)(?=\\S)(?:.+?[*_]*)(?<=\\S)\\1", attributesForTraits(.TraitBold, attributes.strongAttributes))
+        addPattern("(\\*\\*|__)(?=\\S)(?:.+?[*_]*)(?<=\\S)\\1", attributesForTraits(.traitBold, attributes.strongAttributes))
         
         // Inline code
         addPattern("(`+)(?:.+?)(?<!`)\\1(?!`)", attributes.inlineCodeAttributes)
@@ -66,23 +66,23 @@ public class MarkdownTextStorage: HighlighterTextStorage {
         commonInit()
     }
     
-    private func commonInit() {
+    fileprivate func commonInit() {
         defaultAttributes = attributes.defaultAttributes
     }
     
     // MARK: Helpers
     
-    private func addPattern(pattern: String, _ attributes: TextAttributes?) {
+    fileprivate func addPattern(_ pattern: String, _ attributes: TextAttributes?) {
         if let attributes = attributes {
             let highlighter = RegularExpressionHighlighter(regularExpression: regexFromPattern(pattern), attributes: attributes)
             addHighlighter(highlighter)
         }
     }
     
-    private func attributesForTraits(traits: UIFontDescriptorSymbolicTraits, _ attributes: TextAttributes?) -> TextAttributes? {
+    fileprivate func attributesForTraits(_ traits: UIFontDescriptorSymbolicTraits, _ attributes: TextAttributes?) -> TextAttributes? {
         var newAttributes = attributes
         
-        if let defaultFont = defaultAttributes[NSFontAttributeName] as? UIFont where attributes == nil {
+        if let defaultFont = defaultAttributes[NSFontAttributeName] as? UIFont, attributes == nil {
             newAttributes = [
                 NSFontAttributeName: fontWithTraits(traits, font: defaultFont)
             ]

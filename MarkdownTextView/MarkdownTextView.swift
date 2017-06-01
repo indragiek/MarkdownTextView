@@ -19,7 +19,7 @@ import UIKit
  * method, call super() implements at first.
  *
  */
-public class MarkdownTextView: UITextView, UITextViewDelegate {
+open class MarkdownTextView: UITextView, UITextViewDelegate {
     /**
     Creates a new instance of the receiver.
     
@@ -53,18 +53,18 @@ public class MarkdownTextView: UITextView, UITextViewDelegate {
     var enterCompleteAtIndex: Int?
     var textViewContentOffsetY: CGFloat?
 
-    let markdownListRegularExpression = try! NSRegularExpression(pattern: "^[-*] .", options: .CaseInsensitive)
-    let markdownNumberListRegularExpression = try! NSRegularExpression(pattern: "^\\d*\\. .", options: .CaseInsensitive)
+    let markdownListRegularExpression = try! NSRegularExpression(pattern: "^[-*] .", options: .caseInsensitive)
+    let markdownNumberListRegularExpression = try! NSRegularExpression(pattern: "^\\d*\\. .", options: .caseInsensitive)
     
-    public func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+    open func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         markdownListItemMatch = nil
         enterCompleteAtIndex = nil
         textViewContentOffsetY = nil
         
         if isReturn(text) {
-            var objectLine = textView.text.substringToIndex(textView.text.startIndex.advancedBy(range.location))
+            var objectLine = textView.text.substring(to: textView.text.index(textView.text.startIndex, offsetBy: range.location))
             
-            let textSplits = objectLine.componentsSeparatedByString("\n")
+            let textSplits = objectLine.components(separatedBy: "\n")
             if textSplits.count > 0 {
                 objectLine = textSplits[textSplits.count - 1]
             }
@@ -72,21 +72,21 @@ public class MarkdownTextView: UITextView, UITextViewDelegate {
             let objectLineRange = NSRange(location: 0, length: objectLine.characters.count)
             
             // Check matches.
-            let listMatches = markdownListRegularExpression.matchesInString(objectLine, options: [], range: objectLineRange)
-            let numberListMatches = markdownNumberListRegularExpression.matchesInString(objectLine, options: [], range: objectLineRange)
+            let listMatches = markdownListRegularExpression.matches(in: objectLine, options: [], range: objectLineRange)
+            let numberListMatches = markdownNumberListRegularExpression.matches(in: objectLine, options: [], range: objectLineRange)
             
             if listMatches.count > 0 || numberListMatches.count > 0 {
                 enterCompleteAtIndex = range.location + 1
                 
                 if numberListMatches.count > 0 {
-                    var number = Int(objectLine.componentsSeparatedByString(".")[0])
+                    var number = Int(objectLine.components(separatedBy: ".")[0])
                     number! += 1
                     markdownListItemMatch = "\(number!)."
                 } else {
-                    markdownListItemMatch = objectLine.componentsSeparatedByString(" ")[0]
+                    markdownListItemMatch = objectLine.components(separatedBy: " ")[0]
                 }
                 
-                markdownListItemMatch!.appendContentsOf(" ")
+                markdownListItemMatch!.append(" ")
                 
                 textViewContentOffsetY = self.contentOffset.y
             }
@@ -95,9 +95,9 @@ public class MarkdownTextView: UITextView, UITextViewDelegate {
         return true
     }
     
-    public func textViewDidChange(textView: UITextView) {
+    open func textViewDidChange(_ textView: UITextView) {
         if markdownListItemMatch != nil {
-            self.text.insertContentsOf(markdownListItemMatch!.characters, at: self.text.startIndex.advancedBy(enterCompleteAtIndex!))
+            self.text.insert(contentsOf: markdownListItemMatch!.characters, at: self.text.index(self.text.startIndex, offsetBy: enterCompleteAtIndex!))
             self.selectedRange = NSRange(location: enterCompleteAtIndex! + markdownListItemMatch!.characters.count, length: 0)
             
             self.setContentOffset(CGPoint(x: 0, y: textViewContentOffsetY!), animated: false)
@@ -106,7 +106,7 @@ public class MarkdownTextView: UITextView, UITextViewDelegate {
 
     // MARK: - Tool
     
-    func isReturn(text: String) -> Bool {
+    func isReturn(_ text: String) -> Bool {
         if text == "\n" {
             return true
         } else {

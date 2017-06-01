@@ -12,9 +12,9 @@ import UIKit
 *  Highlights Markdown lists using specifiable marker patterns.
 */
 public final class MarkdownListHighlighter: HighlighterType {
-    private let regularExpression: NSRegularExpression
-    private let attributes: TextAttributes?
-    private let itemAttributes: TextAttributes?
+    fileprivate let regularExpression: NSRegularExpression
+    fileprivate let attributes: TextAttributes?
+    fileprivate let itemAttributes: TextAttributes?
     
     /**
     Creates a new instance of the receiver.
@@ -35,7 +35,7 @@ public final class MarkdownListHighlighter: HighlighterType {
     
     // MARK: HighlighterType
     
-    public func highlightAttributedString(attributedString: NSMutableAttributedString) {
+    public func highlightAttributedString(_ attributedString: NSMutableAttributedString) {
         if (attributes == nil && itemAttributes == nil) { return }
         
         enumerateMatches(regularExpression, string: attributedString.string) {
@@ -43,13 +43,13 @@ public final class MarkdownListHighlighter: HighlighterType {
                 attributedString.addAttributes(attributes, range: $0.range)
             }
             if let itemAttributes = self.itemAttributes {
-                attributedString.addAttributes(itemAttributes, range: $0.rangeAtIndex(1))
+                attributedString.addAttributes(itemAttributes, range: $0.rangeAt(1))
             }
         }
     }
 }
 
-private func listItemRegexWithMarkerPattern(pattern: String) -> NSRegularExpression {
+private func listItemRegexWithMarkerPattern(_ pattern: String) -> NSRegularExpression {
     // From markdown.pl v1.0.1 <http://daringfireball.net/projects/markdown/>
     return regexFromPattern("^(?:[ ]{0,3}(?:\(pattern))[ \t]+)(.+)\n")
 }

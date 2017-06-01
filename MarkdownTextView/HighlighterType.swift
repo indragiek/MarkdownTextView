@@ -16,5 +16,5 @@ public protocol HighlighterType {
     /**
     *  Highlights the text in `attributedString`
     */
-    func highlightAttributedString(attributedString: NSMutableAttributedString)
+    func highlightAttributedString(_ attributedString: NSMutableAttributedString)
 }
