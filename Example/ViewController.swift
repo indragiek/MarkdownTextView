@@ -11,7 +11,7 @@ import MarkdownTextView
 
 class ViewController: UIViewController {
     var textView: MarkdownTextView!
-    
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         
