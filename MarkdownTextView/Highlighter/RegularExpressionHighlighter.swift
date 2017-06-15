@@ -12,9 +12,9 @@ import UIKit
 *  Highlighter that uses a regular expression to match character
 *  sequences to highlight.
 */
-public class RegularExpressionHighlighter: HighlighterType {
-    private let regularExpression: NSRegularExpression
-    private let attributes: TextAttributes
+open class RegularExpressionHighlighter: HighlighterType {
+    fileprivate let regularExpression: NSRegularExpression
+    fileprivate let attributes: TextAttributes
     
     /**
     Creates a new instance of the receiver.
@@ -33,7 +33,7 @@ public class RegularExpressionHighlighter: HighlighterType {
     
     // MARK: HighlighterType
     
-    public func highlightAttributedString(attributedString: NSMutableAttributedString) {
+    open func highlightAttributedString(_ attributedString: NSMutableAttributedString) {
         enumerateMatches(regularExpression, string: attributedString.string) {
             attributedString.addAttributes(self.attributes, range: $0.range)
         }

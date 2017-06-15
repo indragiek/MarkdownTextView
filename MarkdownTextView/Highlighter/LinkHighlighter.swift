@@ -12,17 +12,17 @@ import UIKit
 *  Highlights URLs.
 */
 public final class LinkHighlighter: HighlighterType {
-    private var detector: NSDataDetector!
+    fileprivate var detector: NSDataDetector!
     
     public init() throws {
-        detector = try NSDataDetector(types: NSTextCheckingType.Link.rawValue)
+        detector = try NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
     }
     
     // MARK: HighlighterType
     
-    public func highlightAttributedString(attributedString: NSMutableAttributedString) {
+    public func highlightAttributedString(_ attributedString: NSMutableAttributedString) {
         enumerateMatches(detector, string: attributedString.string) {
-            if let URL = $0.URL {
+            if let URL = $0.url {
                 let linkAttributes = [
                     NSLinkAttributeName: URL
                 ]

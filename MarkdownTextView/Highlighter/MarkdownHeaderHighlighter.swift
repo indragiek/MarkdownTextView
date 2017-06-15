@@ -13,8 +13,8 @@ import UIKit
 */
 public final class MarkdownHeaderHighlighter: HighlighterType {
     // From markdown.pl v1.0.1 <http://daringfireball.net/projects/markdown/>
-    private static let HeaderRegex = regexFromPattern("^(\\#{1,6})[ \t]*(?:.+?)[ \t]*\\#*\n+")
-    private let attributes: MarkdownAttributes.HeaderAttributes
+    fileprivate static let HeaderRegex = regexFromPattern("^(\\#{1,6})[ \t]*(?:.+?)[ \t]*\\#*\n+")
+    fileprivate let attributes: MarkdownAttributes.HeaderAttributes
     
     /**
     Creates a new instance of the receiver.
@@ -29,9 +29,9 @@ public final class MarkdownHeaderHighlighter: HighlighterType {
     
     // MARK: HighlighterType
     
-    public func highlightAttributedString(attributedString: NSMutableAttributedString) {
-        enumerateMatches(self.dynamicType.HeaderRegex, string: attributedString.string) {
-            let level = $0.rangeAtIndex(1).length
+    public func highlightAttributedString(_ attributedString: NSMutableAttributedString) {
+        enumerateMatches(type(of: self).HeaderRegex, string: attributedString.string) {
+            let level = $0.rangeAt(1).length
             if let attributes = self.attributes.attributesForHeaderLevel(level) {
                 attributedString.addAttributes(attributes, range: $0.range)
             }

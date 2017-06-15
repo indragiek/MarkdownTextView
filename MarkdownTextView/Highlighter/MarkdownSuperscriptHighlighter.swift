@@ -12,8 +12,8 @@ import UIKit
 *  Highlights super^script in Markdown text (unofficial extension)
 */
 public final class MarkdownSuperscriptHighlighter: HighlighterType {
-    private static let SuperscriptRegex = regexFromPattern("(\\^+)(?:(?:[^\\^\\s\\(][^\\^\\s]*)|(?:\\([^\n\r\\)]+\\)))")
-    private let fontSizeRatio: CGFloat
+    fileprivate static let SuperscriptRegex = regexFromPattern("(\\^+)(?:(?:[^\\^\\s\\(][^\\^\\s]*)|(?:\\([^\n\r\\)]+\\)))")
+    fileprivate let fontSizeRatio: CGFloat
     
     /**
     Creates a new instance of the receiver.
@@ -29,26 +29,26 @@ public final class MarkdownSuperscriptHighlighter: HighlighterType {
     
     // MARK: HighlighterType
     
-    public func highlightAttributedString(attributedString: NSMutableAttributedString) {
+    public func highlightAttributedString(_ attributedString: NSMutableAttributedString) {
         var previousRange: NSRange?
         var level: Int = 0
         
-        enumerateMatches(self.dynamicType.SuperscriptRegex, string: attributedString.string) {
-            level += $0.rangeAtIndex(1).length
+        enumerateMatches(type(of: self).SuperscriptRegex, string: attributedString.string) {
+            level += $0.rangeAt(1).length
             let textRange = $0.range
-            let attributes = attributedString.attributesAtIndex(textRange.location, effectiveRange: nil) 
+            let attributes = attributedString.attributes(at: textRange.location, effectiveRange: nil) 
             
             let isConsecutiveRange: Bool = {
-                if let previousRange = previousRange where NSMaxRange(previousRange) == textRange.location {
+                if let previousRange = previousRange, NSMaxRange(previousRange) == textRange.location {
                     return true
                 }
                 return false
             }()
             if isConsecutiveRange {
-                level++
+                level += 1
             }
             
-            attributedString.addAttributes(superscriptAttributes(attributes, level: level, ratio: self.fontSizeRatio), range: textRange)
+            attributedString.addAttributes(superscriptAttributes(attributes as TextAttributes, level: level, ratio: self.fontSizeRatio), range: textRange)
             previousRange = textRange
             
             if !isConsecutiveRange {
@@ -58,11 +58,11 @@ public final class MarkdownSuperscriptHighlighter: HighlighterType {
     }
 }
 
-private func superscriptAttributes(attributes: TextAttributes, level: Int, ratio: CGFloat) -> TextAttributes {
+private func superscriptAttributes(_ attributes: TextAttributes, level: Int, ratio: CGFloat) -> TextAttributes {
     if let font = attributes[NSFontAttributeName] as? UIFont {
-        let adjustedFont = UIFont(descriptor: font.fontDescriptor(), size: font.pointSize * ratio)
+        let adjustedFont = UIFont(descriptor: font.fontDescriptor, size: font.pointSize * ratio)
         return [
-            kCTSuperscriptAttributeName as String: level,
+            kCTSuperscriptAttributeName as String: level as AnyObject,
             NSFontAttributeName: adjustedFont
         ]
     }

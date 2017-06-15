@@ -12,15 +12,15 @@ import UIKit
 *  Text storage with support for automatically highlighting text
 *  as it changes.
 */
-public class HighlighterTextStorage: NSTextStorage {
-    private let backingStore: NSMutableAttributedString
-    private var highlighters = [HighlighterType]()
+open class HighlighterTextStorage: NSTextStorage {
+    fileprivate let backingStore: NSMutableAttributedString
+    fileprivate var highlighters = [HighlighterType]()
     
     /// Default attributes to use for styling text.
-    public var defaultAttributes: [String: AnyObject] = [
-        NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+    open var defaultAttributes: [String: AnyObject] = [
+        NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
     ] {
-        didSet { editedAll(.EditedAttributes) }
+        didSet { editedAll(.editedAttributes) }
     }
     
     // MARK: API
@@ -32,9 +32,9 @@ public class HighlighterTextStorage: NSTextStorage {
     
     :param: highlighter The highlighter to add.
     */
-    public func addHighlighter(highlighter: HighlighterType) {
+    open func addHighlighter(_ highlighter: HighlighterType) {
         highlighters.append(highlighter)
-        editedAll(.EditedAttributes)
+        editedAll(.editedAttributes)
     }
     
     // MARK: Initialization
@@ -51,25 +51,25 @@ public class HighlighterTextStorage: NSTextStorage {
     
     // MARK: NSTextStorage
     
-    public override var string: String {
+    open override var string: String {
         return backingStore.string
     }
     
-    public override func attributesAtIndex(location: Int, effectiveRange range: NSRangePointer) -> [String : AnyObject] {
-        return backingStore.attributesAtIndex(location, effectiveRange: range)
+    open override func attributes(at location: Int, effectiveRange range: NSRangePointer?) -> [String : Any] {
+        return backingStore.attributes(at: location, effectiveRange: range)
     }
     
-    public override func replaceCharactersInRange(range: NSRange, withAttributedString attrString: NSAttributedString) {
-        backingStore.replaceCharactersInRange(range, withAttributedString: attrString)
-        edited(.EditedCharacters, range: range, changeInLength: attrString.length - range.length)
+    open override func replaceCharacters(in range: NSRange, with attrString: NSAttributedString) {
+        backingStore.replaceCharacters(in: range, with: attrString)
+        edited(.editedCharacters, range: range, changeInLength: attrString.length - range.length)
     }
     
-    public override func setAttributes(attrs: [String : AnyObject]?, range: NSRange) {
+    open override func setAttributes(_ attrs: [String : Any]?, range: NSRange) {
         backingStore.setAttributes(attrs, range: range)
-        edited(.EditedAttributes, range: range, changeInLength: 0)
+        edited(.editedAttributes, range: range, changeInLength: 0)
     }
     
-    public override func processEditing() {
+    open override func processEditing() {
         // This is inefficient but necessary because certain
         // edits can cause formatting changes that span beyond
         // line or paragraph boundaries. This should be alright
@@ -80,18 +80,18 @@ public class HighlighterTextStorage: NSTextStorage {
         super.processEditing()
     }
     
-    private func editedAll(actions: NSTextStorageEditActions) {
+    fileprivate func editedAll(_ actions: NSTextStorageEditActions) {
         edited(actions, range: NSRange(location: 0, length: backingStore.length), changeInLength: 0)
     }
     
-    private func highlightRange(range: NSRange) {
+    fileprivate func highlightRange(_ range: NSRange) {
         backingStore.beginEditing()
         setAttributes(defaultAttributes, range: range)
-        let attrString = backingStore.attributedSubstringFromRange(range).mutableCopy() as! NSMutableAttributedString
+        let attrString = backingStore.attributedSubstring(from: range).mutableCopy() as! NSMutableAttributedString
         for highlighter in highlighters {
             highlighter.highlightAttributedString(attrString)
         }
-        replaceCharactersInRange(range, withAttributedString: attrString)
+        replaceCharacters(in: range, with: attrString)
         backingStore.endEditing()
     }
 }

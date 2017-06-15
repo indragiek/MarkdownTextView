@@ -16,7 +16,7 @@ import UIKit
 *  blocks in Markdown text.
 */
 public final class MarkdownFencedCodeHighlighter: RegularExpressionHighlighter {
-    private static let FencedCodeRegex = regexFromPattern("^(`{3})(?:.*)?$\n[\\s\\S]*\n\\1$")
+    fileprivate static let FencedCodeRegex = regexFromPattern("^(`{3})(?:.*)?$\n[\\s\\S]*\n\\1$")
     
     /**
     Creates a new instance of the receiver.
@@ -26,6 +26,6 @@ public final class MarkdownFencedCodeHighlighter: RegularExpressionHighlighter {
     :returns: A new instance of the receiver.
     */
     public init(attributes: TextAttributes) {
-        super.init(regularExpression: self.dynamicType.FencedCodeRegex, attributes: attributes)
+        super.init(regularExpression: type(of: self).FencedCodeRegex, attributes: attributes)
     }
 }
